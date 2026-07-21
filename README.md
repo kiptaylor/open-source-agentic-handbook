@@ -37,7 +37,25 @@ documents, proprietary examples, or confidential data. See
 - Security and data boundaries
 - Framework-neutral examples
 
+## Foundation
+
+The initial architecture separates bounded worker agents from an independent
+control plane and deterministic enforcement. Start with:
+
+- [Agentic System Foundation](docs/FOUNDATION.md)
+- [Skills and Agent Profiles](docs/SKILLS_AND_PROFILES.md)
+- [Orchestration and Control](docs/ORCHESTRATION_AND_CONTROL.md)
+- [First Pass](docs/FIRST_PASS.md)
+- [Reusable Templates](templates/README.md)
+
 The working sequence is maintained in [Roadmap](docs/ROADMAP.md).
+
+## Transfer Desk
+
+The local-first [Transfer Desk](site/README.md) helps reviewers decide which
+concept-level handbook topics should be rewritten for this public repository.
+It applies the public-source policy as a five-gate review and exports a drafting
+manifest without storing private source material.
 
 ## Contributing
 

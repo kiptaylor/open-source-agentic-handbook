@@ -1,0 +1,37 @@
+handoff:
+  task_id: synthetic-task-001
+  from_profile: synthetic-reviewer
+  to_profile: synthetic-verifier
+  task_revision: 1
+
+completed:
+  - Reviewed every publication gate.
+
+artifacts:
+  - id: artifact://synthetic/review-result
+    classification: public-synthetic
+    integrity: checksum-placeholder
+
+evidence:
+  facts:
+    - Five gate results are recorded in the review artifact.
+  inferences:
+    - The outline appears ready for an independent verification pass.
+  proposals:
+    - Accept only if the verifier confirms public provenance.
+
+remaining:
+  unresolved_risks:
+    - One citation requires license confirmation.
+  remaining_budget:
+    retries: 0
+    time_limit_minutes: 5
+  next_allowed_action: Verify the review artifact.
+
+context_manifest:
+  id: artifact://synthetic/context-manifest
+  revision: 1
+
+escalation:
+  required_if:
+    - license compatibility cannot be confirmed

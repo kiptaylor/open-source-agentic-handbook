@@ -1,0 +1,29 @@
+scope_expansion:
+  task_id: synthetic-task-001
+  current_revision: 1
+  requested_by: synthetic-worker
+  status: proposed
+
+change:
+  category: new-public-source
+  description: Add one public specification needed to verify a technical claim.
+  requested_authority:
+    sources:
+      - public-specification-placeholder
+    tools: []
+    actions:
+      - read
+
+rationale:
+  expected_benefit: Resolve an unsupported claim.
+  new_risks:
+    - license compatibility requires review
+  alternatives:
+    - remove the unsupported claim
+  rollback: Remove the source and dependent claim from the task context.
+
+approval:
+  security_review: pending
+  human_review: not-required-unless-risk-changes
+  decision: pending
+  resulting_task_revision: null
