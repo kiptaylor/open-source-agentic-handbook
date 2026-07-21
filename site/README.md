@@ -1,12 +1,13 @@
-# Transfer Desk
+# Open Agentic Handbook site
 
-Transfer Desk is the local-first review site for the Open Source Agentic
-Handbook. It helps reviewers classify concept-level candidates, apply the
-repository's public-source gates, and export a drafting manifest.
+This site explains the Open Source Agentic Handbook: its public boundary,
+repository layers, orchestration model, control-plane roles, current
+foundation, and Now / Next / Later direction.
 
-The site must never be used to paste or store private source material. Review
-data stays in the browser and exported manifests contain only public-safe
-metadata, intended outcomes, decisions, and public citations.
+It is an explainer, not a content-transfer or intake tool. It does not accept,
+store, transform, or export source material. Any future media intake must be a
+separate gated system with consent, isolation, redaction, provenance, human
+approval, and deletion controls.
 
 ## Local development
 

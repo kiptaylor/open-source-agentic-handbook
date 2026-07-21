@@ -22,15 +22,18 @@ async function render() {
   );
 }
 
-test("server-renders the public-safe transfer desk", async () => {
+test("server-renders the public handbook explainer", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Transfer Desk \| Open Source Agentic Handbook<\/title>/i);
-  assert.match(html, /Decide what earns a place in the public handbook/);
-  assert.match(html, /Public-readiness checks/);
-  assert.match(html, /No private content/);
+  assert.match(html, /<title>Open Agentic Handbook \| Systems that scale with boundaries<\/title>/i);
+  assert.match(html, /Systems that scale/);
+  assert.match(html, /The orchestration model/);
+  assert.match(html, /Built in public/);
+  assert.match(html, /NO PRIVATE NOTES/);
+  assert.match(html, /What we want/);
+  assert.doesNotMatch(html, /Add candidate|Export manifest|Transfer Desk/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/);
 });

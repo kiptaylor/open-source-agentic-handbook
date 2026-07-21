@@ -3,7 +3,7 @@
   "assets": [
     {
       "path": "site/public/og.png",
-      "purpose": "Transfer Desk social preview",
+      "purpose": "Open Agentic Handbook social preview",
       "sourceType": "generated-for-this-project",
       "reviewed": true,
       "review": "Confirmed to contain only the public product name, public-safe interface motifs, and synthetic text."

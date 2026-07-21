@@ -22,20 +22,20 @@ export async function generateMetadata(): Promise<Metadata> {
   const socialImage = new URL("/og.png", origin).toString();
 
   return {
-    title: "Transfer Desk | Open Source Agentic Handbook",
+    title: "Open Agentic Handbook | Systems that scale with boundaries",
     description:
-      "A public-safe review workspace for choosing, rewriting, and validating handbook knowledge.",
+      "A public-safe field guide and tested foundation for designing, coordinating, and evaluating agentic systems.",
     openGraph: {
-      title: "Transfer Desk",
+      title: "Open Agentic Handbook",
       description:
-        "Choose what belongs in the public Agentic Handbook—and make every section cross the same public-safety gates.",
+        "A ground-up field guide for agentic systems that scale with boundaries.",
       type: "website",
       images: [{ url: socialImage, width: 1536, height: 1024 }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Transfer Desk",
-      description: "A public-safe knowledge transfer workspace.",
+      title: "Open Agentic Handbook",
+      description: "Systems that scale with boundaries.",
       images: [socialImage],
     },
   };

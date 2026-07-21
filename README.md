@@ -59,7 +59,7 @@ control plane and deterministic enforcement. Start with:
 - [`examples/`](examples/README.md) contains validated synthetic scenarios.
 - [`tests/`](tests/repository/foundation.test.mjs) and [`tools/`](tools/README.md)
   enforce structure and public-safety checks.
-- [`site/`](site/README.md) contains Transfer Desk.
+- [`site/`](site/README.md) contains the public project explainer.
 
 Validate the complete repository with Node.js 22 or later:
 
@@ -74,12 +74,11 @@ is ignored by Git and its values are never printed by the validator.
 
 The working sequence is maintained in [Roadmap](docs/ROADMAP.md).
 
-## Transfer Desk
+## Project explainer
 
-The local-first [Transfer Desk](site/README.md) helps reviewers decide which
-concept-level handbook topics should be rewritten for this public repository.
-It applies the public-source policy as a five-gate review and exports a drafting
-manifest without storing private source material.
+The [project site](site/README.md) explains the repository boundary,
+orchestration architecture, versioned foundation, and Now / Next / Later
+direction. It is deliberately not a content intake or transfer surface.
 
 ## Contributing
 

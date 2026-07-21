@@ -34,7 +34,7 @@ This is a public, ground-up handbook for agentic systems.
 - `examples/` contains synthetic scenarios with their own README, dependencies,
   and validation instructions.
 - `tests/` and `tools/` enforce repository structure and public-safety checks.
-- `site/` contains the Transfer Desk review application.
+- `site/` contains the public project explainer.
 
 Do not create directories for private imports, raw data, recordings,
 transcripts, or private notes. Sensitive local scan terms belong only in the
