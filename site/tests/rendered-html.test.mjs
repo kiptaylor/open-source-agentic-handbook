@@ -33,7 +33,10 @@ test("server-renders the public handbook explainer", async () => {
   assert.match(html, /The orchestration model/);
   assert.match(html, /Built in public/);
   assert.match(html, /NO PRIVATE NOTES/);
+  assert.match(html, /Every agent and project should explain itself/);
   assert.match(html, /What we want/);
+  assert.match(html, /Request a capability/);
+  assert.match(html, /Nothing is uploaded or submitted/);
   assert.doesNotMatch(html, /Add candidate|Export manifest|Transfer Desk/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/);
 });

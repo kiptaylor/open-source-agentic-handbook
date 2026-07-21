@@ -47,6 +47,7 @@ control plane and deterministic enforcement. Start with:
 - [Skills and Agent Profiles](docs/skills-and-profiles/OVERVIEW.md)
 - [Orchestration and Control](docs/orchestration/OVERVIEW.md)
 - [First Pass](docs/foundations/FIRST_PASS.md)
+- [Agent and Project Companion Sites](docs/foundations/COMPANION_SITES.md)
 - [Reusable Templates](templates/README.md)
 
 ## Project structure
@@ -78,7 +79,9 @@ The working sequence is maintained in [Roadmap](docs/ROADMAP.md).
 
 The [project site](site/README.md) explains the repository boundary,
 orchestration architecture, versioned foundation, and Now / Next / Later
-direction. It is deliberately not a content intake or transfer surface.
+direction. It also demonstrates a reusable companion-site pattern for agents
+and projects, including a browser-local capability request composer. It is
+deliberately not a private-content intake or transfer surface.
 
 ## Contributing
 

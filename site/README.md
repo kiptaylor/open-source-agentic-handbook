@@ -2,12 +2,15 @@
 
 This site explains the Open Source Agentic Handbook: its public boundary,
 repository layers, orchestration model, control-plane roles, current
-foundation, and Now / Next / Later direction.
+foundation, Now / Next / Later direction, and the companion-site pattern for
+explaining and extending agents and projects.
 
-It is an explainer, not a content-transfer or intake tool. It does not accept,
-store, transform, or export source material. Any future media intake must be a
-separate gated system with consent, isolation, redaction, provenance, human
-approval, and deletion controls.
+The capability request composer stores concept-level drafts only in the local
+browser and can copy a structured proposal for review. It does not upload or
+submit requests and is not a content-transfer or source-material intake tool.
+Any future shared submission requires an authenticated, approved adapter. Any
+future media intake must be a separate gated system with consent, isolation,
+redaction, provenance, human approval, and deletion controls.
 
 ## Local development
 

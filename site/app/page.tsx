@@ -1,8 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 
 type Horizon = "Now" | "Next" | "Later";
+type RequestKind = "Skill" | "Feature" | "Integration" | "Guide";
+
+type CapabilityRequest = {
+  id: string;
+  kind: RequestKind;
+  title: string;
+  outcome: string;
+  dataBoundary: string;
+  authority: string;
+};
+
+const requestStorageKey = "open-agentic-handbook-capability-requests-v1";
 
 const metrics = [
   { value: "15", label: "bounded skills" },
@@ -82,6 +95,29 @@ const controlRoles = [
   },
 ];
 
+const companionPillars = [
+  {
+    number: "01",
+    title: "Explain",
+    body: "State the project or agent mission, owner, boundaries, inputs, outputs, and explicit non-goals.",
+  },
+  {
+    number: "02",
+    title: "Inspect",
+    body: "Show installed skills, versions, permissions, dependencies, evaluations, and current operating status.",
+  },
+  {
+    number: "03",
+    title: "Request",
+    body: "Let people propose a skill, feature, integration, or guide through one consistent capability contract.",
+  },
+  {
+    number: "04",
+    title: "Govern",
+    body: "Make review state, public provenance, data boundaries, human approval, and release evidence visible.",
+  },
+];
+
 const wants: Record<Horizon, Array<{ title: string; body: string; status: string }>> = {
   Now: [
     {
@@ -138,6 +174,72 @@ const wants: Record<Horizon, Array<{ title: string; body: string; status: string
 
 export default function Home() {
   const [horizon, setHorizon] = useState<Horizon>("Now");
+  const [requests, setRequests] = useState<CapabilityRequest[]>([]);
+  const [requestsHydrated, setRequestsHydrated] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        const stored = window.localStorage.getItem(requestStorageKey);
+        if (stored) {
+          const parsed = JSON.parse(stored) as CapabilityRequest[];
+          if (Array.isArray(parsed)) setRequests(parsed);
+        }
+      } catch {
+        window.localStorage.removeItem(requestStorageKey);
+      }
+      setRequestsHydrated(true);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (requestsHydrated) {
+      window.localStorage.setItem(requestStorageKey, JSON.stringify(requests));
+    }
+  }, [requests, requestsHydrated]);
+
+  function addRequest(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const fields = new FormData(form);
+    const title = String(fields.get("title") ?? "").trim();
+    const outcome = String(fields.get("outcome") ?? "").trim();
+    if (!title || !outcome) return;
+
+    setRequests((current) => [
+      ...current,
+      {
+        id: `request-${Date.now()}`,
+        kind: String(fields.get("kind")) as RequestKind,
+        title,
+        outcome,
+        dataBoundary: String(fields.get("dataBoundary")),
+        authority: String(fields.get("authority")),
+      },
+    ]);
+    form.reset();
+  }
+
+  async function copyRequest(request: CapabilityRequest) {
+    await navigator.clipboard.writeText(
+      JSON.stringify(
+        {
+          requestType: request.kind,
+          requestedCapability: request.title,
+          desiredOutcome: request.outcome,
+          dataBoundary: request.dataBoundary,
+          boundedAuthority: request.authority,
+          reviewRequired: ["public provenance", "permissions", "failure behavior", "validation"],
+        },
+        null,
+        2,
+      ),
+    );
+    setCopiedId(request.id);
+    window.setTimeout(() => setCopiedId(null), 1600);
+  }
 
   return (
     <main>
@@ -150,12 +252,13 @@ export default function Home() {
           </span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#foundation">Foundation</a>
           <a href="#architecture">Architecture</a>
           <a href="#repository">Repository</a>
+          <a href="#companion">Site pattern</a>
           <a href="#wants">Wants</a>
+          <a href="#requests">Requests</a>
         </nav>
-        <a className="header-cta" href="#contribute">Contribute <span aria-hidden="true">↗</span></a>
+        <a className="header-cta" href="#requests">Add an idea <span aria-hidden="true">↘</span></a>
       </header>
 
       <section className="hero" id="top">
@@ -275,6 +378,33 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section companion" id="companion">
+        <div className="companion-heading">
+          <div>
+            <p className="eyebrow"><span /> A reusable front door</p>
+            <h2>Every agent and project should explain itself.</h2>
+          </div>
+          <div>
+            <p>A companion site is the human control surface for a capability: part documentation, part inventory, part request desk, and part governance record.</p>
+            <a className="text-link" href="#requests">Draft a capability request <span>↓</span></a>
+          </div>
+        </div>
+        <div className="companion-grid">
+          {companionPillars.map((pillar) => (
+            <article key={pillar.title}>
+              <span>{pillar.number}</span>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className="companion-contract">
+          <span>COMPANION SITE CONTRACT</span>
+          <p>Identity + skills + boundaries + status + requests + evidence</p>
+          <small>One recognizable pattern across every project and agent.</small>
+        </div>
+      </section>
+
       <section className="section wants" id="wants">
         <div className="wants-intro">
           <p className="eyebrow"><span /> Direction, not a backlog dump</p>
@@ -303,6 +433,89 @@ export default function Home() {
               <b>{item.status}</b>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="section requests" id="requests">
+        <div className="request-heading">
+          <p className="eyebrow"><span /> Extend the system deliberately</p>
+          <h2>Request a capability.</h2>
+          <p>Describe the outcome and its boundaries—not private source material. This first-pass composer creates a portable proposal and keeps it only in this browser.</p>
+          <div className="request-safety">
+            <strong>PUBLIC-SAFE METADATA ONLY</strong>
+            <span>Do not enter private notes, names, recordings, customer data, credentials, or internal links.</span>
+          </div>
+        </div>
+
+        <div className="request-workspace">
+          <form className="request-form" onSubmit={addRequest}>
+            <div className="form-topline"><span>New proposal</span><small>All fields required</small></div>
+            <label>
+              What kind of addition is this?
+              <select name="kind" defaultValue="Skill">
+                <option>Skill</option>
+                <option>Feature</option>
+                <option>Integration</option>
+                <option>Guide</option>
+              </select>
+            </label>
+            <label>
+              Capability name
+              <input name="title" maxLength={80} required placeholder="Example: dependency review skill" />
+            </label>
+            <label>
+              Desired outcome
+              <textarea name="outcome" maxLength={420} required placeholder="Explain what someone should be able to accomplish and how success could be checked." />
+            </label>
+            <div className="form-pair">
+              <label>
+                Data boundary
+                <select name="dataBoundary" defaultValue="No data required">
+                  <option>No data required</option>
+                  <option>Public information only</option>
+                  <option>Synthetic data only</option>
+                </select>
+              </label>
+              <label>
+                Maximum authority
+                <select name="authority" defaultValue="Advisory only">
+                  <option>Advisory only</option>
+                  <option>Read-only tools</option>
+                  <option>May propose actions</option>
+                </select>
+              </label>
+            </div>
+            <button className="submit-request" type="submit">Add local draft <span>＋</span></button>
+            <small className="local-note">Nothing is uploaded or submitted. A future authenticated adapter can route approved proposals to the project’s issue tracker.</small>
+          </form>
+
+          <div className="request-drafts">
+            <div className="drafts-head"><span>Local drafts</span><small>{requests.length.toString().padStart(2, "0")}</small></div>
+            {requests.length === 0 ? (
+              <div className="empty-drafts">
+                <span aria-hidden="true">＋</span>
+                <h3>No requests drafted yet.</h3>
+                <p>Add a bounded capability idea. It will appear here as a portable review contract.</p>
+              </div>
+            ) : (
+              <div className="draft-list">
+                {requests.map((request, index) => (
+                  <article key={request.id}>
+                    <div className="draft-title">
+                      <span>{(index + 1).toString().padStart(2, "0")} · {request.kind}</span>
+                      <button type="button" onClick={() => setRequests((current) => current.filter((item) => item.id !== request.id))}>Remove</button>
+                    </div>
+                    <h3>{request.title}</h3>
+                    <p>{request.outcome}</p>
+                    <div className="draft-meta"><span>{request.dataBoundary}</span><span>{request.authority}</span></div>
+                    <button className="copy-request" type="button" onClick={() => copyRequest(request)}>
+                      {copiedId === request.id ? "Copied" : "Copy proposal JSON"} <span>{copiedId === request.id ? "✓" : "↗"}</span>
+                    </button>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

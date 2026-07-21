@@ -31,6 +31,8 @@ The handbook will grow in small, reviewable layers.
 - Evaluation fixtures using synthetic data
 - Review checklists and reusable public templates
 - Synthetic control-plane and scope-expansion validation scenarios
+- A reusable companion-site template for explaining agents, inspecting skills,
+  and drafting bounded capability requests
 
 ## Phase 4: Operations and maintenance
 

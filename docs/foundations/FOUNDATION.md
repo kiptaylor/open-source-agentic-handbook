@@ -27,6 +27,9 @@ the smallest set of skills, tools, data, and authority required for a task.
   envelopes, control-plane roles, scope expansion, and handoffs.
 - [First Pass](FIRST_PASS.md) identifies the default material to build before
   adding advanced capabilities.
+- [Agent and Project Companion Sites](COMPANION_SITES.md) defines the shared
+  human-facing surface for explaining, inspecting, requesting, and governing
+  capabilities.
 - [`templates/`](../../templates/README.md) contains synthetic, reusable contracts
   for implementation and review.
 
