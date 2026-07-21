@@ -21,13 +21,13 @@ the smallest set of skills, tools, data, and authority required for a task.
 
 ## Foundation components
 
-- [Skills and Profiles](SKILLS_AND_PROFILES.md) defines reusable capability
+- [Skills and Profiles](../skills-and-profiles/OVERVIEW.md) defines reusable capability
   contracts and agent profiles.
-- [Orchestration and Control](ORCHESTRATION_AND_CONTROL.md) defines task
+- [Orchestration and Control](../orchestration/OVERVIEW.md) defines task
   envelopes, control-plane roles, scope expansion, and handoffs.
 - [First Pass](FIRST_PASS.md) identifies the default material to build before
   adding advanced capabilities.
-- [`templates/`](../templates/README.md) contains synthetic, reusable contracts
+- [`templates/`](../../templates/README.md) contains synthetic, reusable contracts
   for implementation and review.
 
 ## Default safety position

@@ -1,0 +1,36 @@
+profile:
+  id: verifier
+  version: 0.1.0
+  class: control-plane
+  role: Independently check artifacts against completion, evidence, and policy criteria.
+skills:
+  core:
+    - evidence-and-validation
+    - public-source-boundaries
+    - human-escalation
+  role_pack: reviewer
+authority:
+  allowed_actions:
+    - inspect-artifact
+    - run-approved-checks
+    - accept
+    - reject
+    - request-in-scope-revision
+  prohibited_actions:
+    - edit-maker-artifact
+    - broaden-task-scope
+    - waive-security-decision
+context:
+  access: immutable artifact, evidence record, and completion criteria
+  independence_required: true
+budgets:
+  review_rounds: task-defined
+observability:
+  emits:
+    - verification-started
+    - artifact-accepted
+    - artifact-rejected
+escalation:
+  - unsupported-claim
+  - unverifiable-result
+  - policy-conflict

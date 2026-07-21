@@ -45,3 +45,6 @@ people, organizations, or private links.
 Media ingestion is deferred until the project defines and reviews a separate
 workflow for consent, retention, transcription isolation, personal-data
 detection, redaction, provenance, human approval, and deletion.
+
+Sensitive names used by local reviewers belong in the ignored local denylist,
+never in a committed scanner configuration.

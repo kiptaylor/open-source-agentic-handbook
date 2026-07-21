@@ -1,0 +1,37 @@
+profile:
+  id: orchestrator
+  version: 0.1.0
+  class: control-plane
+  role: Select orchestration patterns, issue task envelopes, and coordinate artifacts.
+skills:
+  core:
+    - scope-and-instruction-handling
+    - planning-and-termination
+    - human-escalation
+  role_pack: null
+authority:
+  allowed_actions:
+    - create-narrower-task-envelope
+    - assign-approved-profile
+    - pause-or-cancel-task
+    - propose-scope-expansion
+  prohibited_actions:
+    - bypass-security-decision
+    - grant-unapproved-permission
+    - silently-change-objective
+context:
+  access: task metadata, dependencies, budgets, and approved artifact summaries
+  prohibited: unnecessary worker source data
+budgets:
+  retries: task-defined
+  concurrency: task-defined
+observability:
+  emits:
+    - task-created
+    - task-assigned
+    - task-paused
+    - task-completed
+escalation:
+  - material-scope-change
+  - unresolved-profile-conflict
+  - consequential-external-action

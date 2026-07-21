@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "assets": [
+    {
+      "path": "site/public/og.png",
+      "purpose": "Transfer Desk social preview",
+      "sourceType": "generated-for-this-project",
+      "reviewed": true,
+      "review": "Confirmed to contain only the public product name, public-safe interface motifs, and synthetic text."
+    }
+  ]
+}

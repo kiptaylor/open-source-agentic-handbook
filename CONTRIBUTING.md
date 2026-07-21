@@ -21,6 +21,23 @@ confidential work.
 - Validation steps are included when the change contains executable material.
 - New dependencies and adapted material include appropriate attribution.
 - The diff contains no secrets, private URLs, private names, or internal IDs.
+- Catalog entries are versioned and referenced by `catalog/registry.yaml`.
+- New binary assets appear in `catalog/public-assets.json` with a completed
+  public-source review.
+- Synthetic scenarios include their own README and validation instructions.
+
+## Validation
+
+Before committing, run:
+
+```sh
+npm test
+npm run validate
+npm run validate:examples
+```
+
+Reviewers may create an ignored `.public-safety-denylist` containing sensitive
+names or hosts that must not appear. Never commit the populated denylist.
 
 ## Style
 

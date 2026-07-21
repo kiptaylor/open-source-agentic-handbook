@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/policy-decision.schema.json",
+  "title": "Policy decision",
+  "type": "object",
+  "required": ["policy_decision", "request", "result", "enforcement", "human_escalation"],
+  "properties": {
+    "policy_decision": {
+      "type": "object",
+      "required": ["id", "task_id", "evaluated_by", "task_revision"]
+    },
+    "request": {
+      "type": "object",
+      "required": ["action", "tool", "data_classification", "external_side_effect"]
+    },
+    "result": {
+      "type": "object",
+      "required": ["decision", "rule", "reason", "required_next_step"],
+      "properties": {
+        "decision": { "enum": ["allow", "deny", "escalate"] }
+      },
+      "additionalProperties": true
+    },
+    "enforcement": {
+      "type": "object",
+      "required": ["gateway", "expected_behavior", "observed_behavior"]
+    },
+    "human_escalation": {
+      "type": "object",
+      "required": ["required", "condition"]
+    }
+  },
+  "additionalProperties": true
+}

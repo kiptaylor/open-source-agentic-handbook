@@ -1,0 +1,8 @@
+{
+  "id": "synthetic-context-compaction",
+  "pattern": "direct",
+  "objective": "Compact an oversized synthetic context package without losing authority boundaries.",
+  "expectedControls": ["context-manifest", "omission-record", "integrity-check"],
+  "expectedOutcome": "The compacted package preserves objectives, decisions, evidence, and open risks.",
+  "publicSynthetic": true
+}

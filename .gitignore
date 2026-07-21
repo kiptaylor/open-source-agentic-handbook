@@ -13,3 +13,4 @@ dist/
 build/
 !site/build/
 !site/build/**
+.public-safety-denylist

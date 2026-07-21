@@ -1,0 +1,8 @@
+{
+  "id": "synthetic-direct-task",
+  "pattern": "direct",
+  "objective": "Classify a synthetic chapter outline against five publication gates.",
+  "expectedControls": ["task-envelope", "context-manifest", "termination-budget"],
+  "expectedOutcome": "The worker returns one bounded review artifact and stops.",
+  "publicSynthetic": true
+}

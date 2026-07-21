@@ -16,6 +16,7 @@ identifiers into these files.
 - [`scope-expansion-request.yaml`](scope-expansion-request.yaml)
 - [`handoff.yaml`](handoff.yaml)
 - [`policy-decision.yaml`](policy-decision.yaml)
+- [`public-safety-denylist.example`](public-safety-denylist.example)
 
 Before using a completed template, validate its permissions, data boundaries,
 failure behavior, human-escalation conditions, and public provenance.

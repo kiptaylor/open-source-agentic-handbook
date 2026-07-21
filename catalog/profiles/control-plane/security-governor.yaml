@@ -1,0 +1,36 @@
+profile:
+  id: security-governor
+  version: 0.1.0
+  class: control-plane
+  role: Evaluate policy, data boundaries, permissions, and planned side effects.
+skills:
+  core:
+    - public-source-boundaries
+    - safe-tool-use
+    - human-escalation
+  policy_overlays:
+    - public-source-publication
+authority:
+  allowed_actions:
+    - allow
+    - deny
+    - require-deterministic-control
+    - escalate
+  prohibited_actions:
+    - execute-requested-side-effect
+    - weaken-enforcement
+    - approve-own-exception
+context:
+  access: policy-relevant task, data, tool, and recipient metadata
+  prohibited: unrelated task content
+budgets:
+  decision_retries: 0
+observability:
+  emits:
+    - policy-allowed
+    - policy-denied
+    - policy-escalated
+escalation:
+  - higher-data-classification
+  - destructive-or-external-action
+  - policy-exception

@@ -1,0 +1,43 @@
+catalog:
+  version: 0.1.0
+  status: foundation
+
+skill_buckets:
+  core:
+    - scope-and-instruction-handling
+    - public-source-boundaries
+    - planning-and-termination
+    - safe-tool-use
+    - evidence-and-validation
+    - failure-recovery
+    - human-escalation
+    - state-and-memory-hygiene
+  roles:
+    - researcher
+    - writer
+    - reviewer
+    - builder
+    - maintainer
+  workflows:
+    - public-knowledge-transfer
+  policies:
+    - public-source-publication
+  tool_adapters: []
+
+profiles:
+  control_plane:
+    - orchestrator
+    - watchdog
+    - context-steward
+    - security-governor
+    - verifier
+  workers:
+    - researcher
+    - writer
+    - builder
+
+orchestration_patterns:
+  - direct
+  - delegated
+  - parallel
+  - maker-checker

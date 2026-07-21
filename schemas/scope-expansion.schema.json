@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/scope-expansion.schema.json",
+  "title": "Scope expansion request",
+  "type": "object",
+  "required": ["scope_expansion", "change", "rationale", "approval"],
+  "properties": {
+    "scope_expansion": {
+      "type": "object",
+      "required": ["task_id", "current_revision", "requested_by", "status"]
+    },
+    "change": {
+      "type": "object",
+      "required": ["category", "description", "requested_authority"]
+    },
+    "rationale": {
+      "type": "object",
+      "required": ["expected_benefit", "new_risks", "alternatives", "rollback"]
+    },
+    "approval": {
+      "type": "object",
+      "required": ["security_review", "human_review", "decision", "resulting_task_revision"]
+    }
+  },
+  "additionalProperties": true
+}

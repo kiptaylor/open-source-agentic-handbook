@@ -26,8 +26,16 @@ This is a public, ground-up handbook for agentic systems.
 
 ## Repository structure
 
-- `docs/` contains project policy, roadmap, and handbook chapters.
-- Future runnable examples should live under `examples/` with their own README,
-  dependencies, and validation instructions.
-- Future reusable templates should live under `templates/` and use only
-  synthetic placeholder data.
+- `docs/` contains the human-readable handbook, policy, and roadmap.
+- `catalog/` contains versioned skills, profiles, orchestration patterns, and
+  reviewed public-asset records.
+- `schemas/` contains machine-readable contract schemas.
+- `templates/` contains reusable contracts with synthetic placeholder data.
+- `examples/` contains synthetic scenarios with their own README, dependencies,
+  and validation instructions.
+- `tests/` and `tools/` enforce repository structure and public-safety checks.
+- `site/` contains the Transfer Desk review application.
+
+Do not create directories for private imports, raw data, recordings,
+transcripts, or private notes. Sensitive local scan terms belong only in the
+ignored `.public-safety-denylist`.

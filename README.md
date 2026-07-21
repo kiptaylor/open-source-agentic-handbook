@@ -22,7 +22,8 @@ public-safe structure before adding handbook guidance or examples.
 This repository is built from first principles and public sources. It does not
 import private repository history, private notes, transcripts, internal process
 documents, proprietary examples, or confidential data. See
-[Public Source Policy](docs/PUBLIC_SOURCE_POLICY.md) for the contribution rules.
+[Public Source Policy](docs/policies/PUBLIC_SOURCE_POLICY.md) for the
+contribution rules.
 
 ## Planned handbook areas
 
@@ -42,11 +43,34 @@ documents, proprietary examples, or confidential data. See
 The initial architecture separates bounded worker agents from an independent
 control plane and deterministic enforcement. Start with:
 
-- [Agentic System Foundation](docs/FOUNDATION.md)
-- [Skills and Agent Profiles](docs/SKILLS_AND_PROFILES.md)
-- [Orchestration and Control](docs/ORCHESTRATION_AND_CONTROL.md)
-- [First Pass](docs/FIRST_PASS.md)
+- [Agentic System Foundation](docs/foundations/FOUNDATION.md)
+- [Skills and Agent Profiles](docs/skills-and-profiles/OVERVIEW.md)
+- [Orchestration and Control](docs/orchestration/OVERVIEW.md)
+- [First Pass](docs/foundations/FIRST_PASS.md)
 - [Reusable Templates](templates/README.md)
+
+## Project structure
+
+- [`docs/`](docs/README.md) is the human-readable handbook.
+- [`catalog/`](catalog/README.md) contains versioned skills, profiles, and
+  orchestration patterns.
+- [`schemas/`](schemas/README.md) defines machine-readable contracts.
+- [`templates/`](templates/README.md) contains synthetic starting points.
+- [`examples/`](examples/README.md) contains validated synthetic scenarios.
+- [`tests/`](tests/repository/foundation.test.mjs) and [`tools/`](tools/README.md)
+  enforce structure and public-safety checks.
+- [`site/`](site/README.md) contains Transfer Desk.
+
+Validate the complete repository with Node.js 22 or later:
+
+```sh
+npm test
+npm run validate
+npm run validate:examples
+```
+
+Sensitive terms can be placed in a local `.public-safety-denylist`. That file
+is ignored by Git and its values are never printed by the validator.
 
 The working sequence is maintained in [Roadmap](docs/ROADMAP.md).
 

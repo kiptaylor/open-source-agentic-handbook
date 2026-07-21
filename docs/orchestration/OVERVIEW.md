@@ -17,7 +17,7 @@ Every task begins with a task envelope that records:
 
 The task envelope is the authority boundary for the work. A prompt or tool
 adapter cannot broaden it. See
-[the task envelope template](../templates/task-envelope.yaml).
+[the task envelope template](../../templates/task-envelope.yaml).
 
 ## Orchestration patterns
 
@@ -61,7 +61,7 @@ material, and the context budget.
 It may compact or reorganize approved material, but it cannot introduce an
 unapproved source. A compaction records what was retained, summarized, and
 omitted. See
-[the context manifest template](../templates/context-manifest.yaml).
+[the context manifest template](../../templates/context-manifest.yaml).
 
 ### Security governor
 
@@ -72,7 +72,7 @@ escalate a request.
 The governor is an interpretation and review role, not the sole security
 control. Deterministic enforcement at tool and data gateways must still deny
 unauthorized actions. See
-[the policy decision template](../templates/policy-decision.yaml).
+[the policy decision template](../../templates/policy-decision.yaml).
 
 ### Verifier
 
@@ -95,7 +95,7 @@ A scope-expansion request is required when work needs any of the following:
 The requesting agent pauses the affected work and records the reason, expected
 benefit, new risk, requested authority, alternatives, and rollback plan.
 Approval creates a new task-envelope revision; it does not edit history. Use
-[the scope expansion template](../templates/scope-expansion-request.yaml).
+[the scope expansion template](../../templates/scope-expansion-request.yaml).
 
 Security-sensitive, externally visible, destructive, or higher-classification
 expansions require human approval. Rejected requests return the task to its
@@ -106,7 +106,7 @@ last approved scope or end it safely.
 Each handoff records the completed work, evidence, artifacts, unresolved risks,
 remaining budget, context manifest, and next allowed action. It must distinguish
 facts, inferences, and proposals. See
-[the handoff template](../templates/handoff.yaml).
+[the handoff template](../../templates/handoff.yaml).
 
 When context cannot fit:
 

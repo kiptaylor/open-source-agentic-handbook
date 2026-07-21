@@ -1,0 +1,8 @@
+{
+  "id": "synthetic-maker-checker",
+  "pattern": "maker-checker",
+  "objective": "Draft and independently review a synthetic permission checklist.",
+  "expectedControls": ["immutable-handoff", "independent-verifier", "revision-budget"],
+  "expectedOutcome": "The verifier accepts or rejects without editing the maker artifact.",
+  "publicSynthetic": true
+}

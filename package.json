@@ -1,0 +1,14 @@
+{
+  "name": "open-source-agentic-handbook",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/repository/*.test.mjs",
+    "validate": "node tools/validate-repository.mjs",
+    "validate:examples": "node examples/validate-scenarios.mjs"
+  }
+}

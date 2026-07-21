@@ -1,0 +1,16 @@
+pattern:
+  id: direct
+  version: 0.1.0
+  purpose: Complete one bounded task with one worker.
+  participants:
+    required:
+      - worker
+    optional:
+      - verifier
+  authority_flow: The worker receives one explicit task envelope.
+  shared_state: One task artifact set and one context manifest.
+  termination:
+    - completion criteria met
+    - retry budget exhausted
+    - scope expansion required
+  validation: Check the result against the task envelope.

@@ -75,7 +75,7 @@ Each skill should define:
 - Human-escalation conditions
 - Public sources, compatibility, owner, and version
 
-Use [the skill specification template](../templates/skill-spec.md) for new
+Use [the skill specification template](../../templates/skill-spec.md) for new
 skills.
 
 ## Agent profile contract
@@ -92,7 +92,7 @@ Each profile should declare:
 
 Profiles do not inherit the orchestrator's permissions. Delegated work receives
 an explicit, narrower task envelope. Use
-[the agent profile template](../templates/agent-profile.yaml) to define a
+[the agent profile template](../../templates/agent-profile.yaml) to define a
 profile.
 
 ## First profiles

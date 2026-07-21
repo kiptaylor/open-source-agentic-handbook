@@ -1,0 +1,6 @@
+skill:
+  id: evidence-and-validation
+  version: 0.1.0
+  bucket: core
+  status: foundation
+  source: original-first-principles

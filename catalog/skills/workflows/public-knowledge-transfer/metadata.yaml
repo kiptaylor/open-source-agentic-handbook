@@ -1,0 +1,6 @@
+skill:
+  id: public-knowledge-transfer
+  version: 0.1.0
+  bucket: workflow
+  status: foundation
+  source: original-first-principles

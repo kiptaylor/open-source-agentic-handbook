@@ -3,6 +3,8 @@
 The first pass establishes the contracts and review behavior needed before the
 handbook adds advanced agents, connectors, or content-ingestion features.
 
+Machine-readable definitions for this work live in [`catalog/`](../../catalog/README.md).
+
 ## Default handbook guidance
 
 The initial chapters should cover:
