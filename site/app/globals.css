@@ -167,6 +167,28 @@ h1 em, h2 em { color: var(--green); font-weight: 400; }
 .role-card p { min-height: 58px; color: var(--ink-soft); font-size: 12px; line-height: 1.65; }
 .role-card > small { display: block; margin-top: 30px; padding-top: 13px; border-top: 1px solid var(--line); color: #6b7580; font-size: 9px; line-height: 1.6; }
 
+.distribution { background: #e7eee9; }
+.distribution-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 16px; align-items: stretch; }
+.manifest-card { min-width: 0; padding: 25px; background: var(--ink); color: white; box-shadow: 12px 14px 0 #cbd7d0; }
+.manifest-card > div { display: flex; align-items: center; justify-content: space-between; padding-bottom: 17px; border-bottom: 1px solid rgba(255, 255, 255, .16); font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: .09em; text-transform: uppercase; }
+.manifest-card > div b { color: #9fd0ba; }
+.manifest-card pre { margin: 23px 0 0; overflow-x: auto; color: #dce8e2; font-family: var(--font-geist-mono), monospace; font-size: 11px; line-height: 1.8; }
+.adoption-steps { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #aebdb5; border-left: 1px solid #aebdb5; }
+.adoption-steps article { min-height: 190px; padding: 22px; display: grid; grid-template-columns: 35px 1fr; gap: 17px; border-right: 1px solid #aebdb5; border-bottom: 1px solid #aebdb5; }
+.adoption-steps article > span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 9px; font-weight: 800; }
+.adoption-steps h3 { margin: 0 0 13px; font-family: var(--serif); font-size: 24px; font-weight: 400; }
+.adoption-steps p { margin: 0; color: #52635b; font-size: 11px; line-height: 1.7; }
+.adoption-steps code { padding: 2px 4px; background: rgba(255,255,255,.55); font-family: var(--font-geist-mono), monospace; font-size: 9px; }
+.command-card { margin-top: 16px; padding: 18px 21px; display: grid; grid-template-columns: .25fr 1fr; gap: 25px; align-items: center; border: 1px solid #aebdb5; background: white; }
+.command-card span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 8px; font-weight: 800; letter-spacing: .1em; }
+.command-card code { overflow-x: auto; color: #43544c; font-family: var(--font-geist-mono), monospace; font-size: 10px; white-space: nowrap; }
+.upgrade-track { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 46px; border-top: 1px solid #aebdb5; border-left: 1px solid #aebdb5; }
+.upgrade-track > div { min-height: 105px; padding: 16px; position: relative; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid #aebdb5; border-bottom: 1px solid #aebdb5; background: rgba(255, 255, 255, .38); }
+.upgrade-track span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 8px; font-weight: 800; }
+.upgrade-track strong { font-family: var(--serif); font-size: 19px; font-weight: 400; }
+.upgrade-track i { position: absolute; right: -8px; top: 42px; z-index: 2; width: 16px; height: 16px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: white; font-size: 8px; font-style: normal; }
+.upgrade-note { max-width: 850px; margin: 17px 0 0 auto; color: #52635b; font-size: 10px; line-height: 1.7; text-align: right; }
+
 .repository { background: var(--paper); }
 .repo-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
 .repo-card { grid-column: span 2; min-height: 310px; padding: 24px; display: flex; flex-direction: column; position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--cream); }
@@ -269,6 +291,7 @@ footer > a:last-child { color: #b8c3cd; font-size: 10px; font-weight: 700; text-
   .hero-copy { max-width: 850px; }
   .system-map { width: 100%; max-width: 670px; }
   .role-grid { grid-template-columns: repeat(3, 1fr); }
+  .distribution-grid { grid-template-columns: 1fr; }
   .companion-grid { grid-template-columns: repeat(2, 1fr); }
   .wants { grid-template-columns: 1fr; }
   .request-workspace { grid-template-columns: 1fr; }
@@ -296,6 +319,14 @@ footer > a:last-child { color: #b8c3cd; font-size: 10px; font-weight: 700; text-
   .flow-step { min-height: 140px; }
   .role-grid { grid-template-columns: 1fr; }
   .role-card { min-height: auto; }
+  .manifest-card { padding: 18px; box-shadow: 7px 8px 0 #cbd7d0; }
+  .manifest-card pre { font-size: 9px; }
+  .adoption-steps { grid-template-columns: 1fr; }
+  .adoption-steps article { min-height: 150px; }
+  .command-card { grid-template-columns: 1fr; }
+  .upgrade-track { grid-template-columns: repeat(2, 1fr); }
+  .upgrade-track i { display: none; }
+  .upgrade-note { text-align: left; }
   .repo-grid { grid-template-columns: 1fr; }
   .repo-card, .repo-card:nth-child(4), .repo-card:nth-child(5) { grid-column: auto; min-height: 285px; }
   .companion-heading { gap: 30px; }

@@ -1,7 +1,8 @@
 # Reusable Templates
 
 These templates define the minimum contracts for skills, profiles, tasks,
-context, handoffs, policy decisions, and scope expansion.
+context, handoffs, policy decisions, scope expansion, downstream selection,
+capability requests, and approvals.
 
 All placeholder values are synthetic. Do not paste private source material,
 names, repository labels, recordings, transcripts, URLs, credentials, or
@@ -16,6 +17,9 @@ identifiers into these files.
 - [`scope-expansion-request.yaml`](scope-expansion-request.yaml)
 - [`handoff.yaml`](handoff.yaml)
 - [`policy-decision.yaml`](policy-decision.yaml)
+- [`project-manifest.json`](project-manifest.json)
+- [`capability-request.json`](capability-request.json)
+- [`approval.json`](approval.json)
 - [`public-safety-denylist.example`](public-safety-denylist.example)
 
 Before using a completed template, validate its permissions, data boundaries,

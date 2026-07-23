@@ -1,6 +1,20 @@
 catalog:
-  version: 0.1.0
-  status: foundation
+  version: 1.0.0
+  status: stable
+
+canonical_registries:
+  agents: registries/agents.json
+  skills: registries/skills.json
+  policies: registries/policies.json
+  guides: registries/guides.json
+  releases: registries/releases.json
+  compatibility: registries/compatibility.json
+  requests: registries/requests.json
+
+distribution_buckets:
+  core: Required by the selected agent profiles.
+  optional: Selected role, workflow, policy, or tool-adapter skills.
+  project: Defined and versioned by a downstream repository.
 
 skill_buckets:
   core:

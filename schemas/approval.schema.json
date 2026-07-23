@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/approval.schema.json",
+  "title": "Human approval record",
+  "type": "object",
+  "required": ["format", "approval"],
+  "properties": {
+    "format": { "const": "open-agentic-handbook/approval@1" },
+    "approval": {
+      "type": "object",
+      "required": [
+        "id",
+        "subject_type",
+        "subject_id",
+        "subject_digest",
+        "decision",
+        "reviewer",
+        "decided_at",
+        "conditions"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "subject_type": {
+          "enum": ["update-plan", "capability-request", "scope-expansion"]
+        },
+        "subject_id": { "type": "string" },
+        "subject_digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "decision": { "enum": ["approved", "rejected"] },
+        "reviewer": { "type": "string", "minLength": 1 },
+        "decided_at": { "type": "string", "format": "date-time" },
+        "conditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

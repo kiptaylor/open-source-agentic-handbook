@@ -1,13 +1,12 @@
 # Open Agentic Handbook site
 
-This site explains the Open Source Agentic Handbook: its public boundary,
-repository layers, orchestration model, control-plane roles, current
-foundation, Now / Next / Later direction, and the companion-site pattern for
-explaining and extending agents and projects.
+This site explains the Open Source Agentic Handbook v1: the canonical hub,
+orchestration roles, skill buckets, tiny downstream manifest, generated bundle,
+structured requests, approvals, and on-demand update workflow.
 
-The capability request composer keeps concept-level drafts in the local
-browser and can copy a structured proposal for review. Shared submission will
-require an authenticated, approved adapter with validation and human approval.
+The capability request composer keeps concept-level drafts in the browser and
+copies the same local-first v1 proposal shape used by the repository command.
+Authenticated issue and pull-request transports remain future adapters.
 
 ## Local development
 

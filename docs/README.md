@@ -13,6 +13,7 @@ implementation artifacts.
 - [Security](security/README.md)
 - [Evaluation](evaluation/README.md)
 - [Operations](operations/README.md)
+- [Distribution](distribution/README.md)
 
 ## Supporting sections
 

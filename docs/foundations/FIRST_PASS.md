@@ -1,7 +1,7 @@
 # First Pass
 
-The first pass establishes the contracts and review behavior needed before the
-handbook adds advanced agents, connectors, or content-ingestion features.
+The v1 first pass establishes the contracts and review behavior needed before
+the handbook adds advanced agents, connectors, or content-ingestion features.
 
 Machine-readable definitions for this work live in [`catalog/`](../../catalog/README.md).
 
@@ -23,7 +23,7 @@ and synthetic example.
 
 ## Default system artifacts
 
-The first implementation layer should provide:
+The v1 implementation provides:
 
 - Core skill specifications
 - Control-plane and worker profiles
@@ -31,6 +31,9 @@ The first implementation layer should provide:
 - Context manifests and scope-expansion requests
 - Security-policy decisions paired with deterministic enforcement examples
 - Maker-checker validation examples
+- Canonical hub registries and a lightweight downstream manifest
+- Generated integration prompts and portable bundles
+- Local request, approval, drift-plan, lock, and update-history artifacts
 
 ## Default decisions
 
@@ -58,7 +61,7 @@ provenance, human approval, and deletion.
 
 ## Acceptance criteria
 
-The first pass is complete when a synthetic task can:
+The first pass acceptance criteria are:
 
 1. Select a profile and approved skills.
 2. Run within an explicit task envelope.
@@ -67,3 +70,7 @@ The first pass is complete when a synthetic task can:
 5. Be paused by a watchdog and blocked by deterministic policy enforcement.
 6. Be independently verified and escalated to a human when required.
 7. Pass a complete public-source and confidential-information review.
+
+Repository tests cover the contract and lifecycle mechanics. A production
+runtime remains responsible for enforcing its declared permissions and data
+boundaries.

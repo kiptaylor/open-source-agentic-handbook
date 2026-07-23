@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
 type Horizon = "Now" | "Next" | "Later";
-type RequestKind = "Skill" | "Feature" | "Integration" | "Guide";
+type RequestKind = "Agent" | "Skill" | "Guide" | "Feature" | "Integration" | "Policy";
 
 type CapabilityRequest = {
   id: string;
@@ -20,8 +20,8 @@ const requestStorageKey = "open-agentic-handbook-capability-requests-v1";
 const metrics = [
   { value: "15", label: "bounded skills" },
   { value: "8", label: "agent profiles" },
-  { value: "4", label: "orchestration patterns" },
-  { value: "7", label: "tested contracts" },
+  { value: "7", label: "canonical registries" },
+  { value: "14", label: "tested contracts" },
 ];
 
 const repoLayers = [
@@ -36,7 +36,7 @@ const repoLayers = [
     index: "02",
     title: "Catalog",
     path: "catalog/",
-    body: "Versioned skills, agent profiles, and orchestration patterns that turn guidance into composable building blocks.",
+    body: "Canonical agent, skill, policy, guide, release, compatibility, and request registries.",
     tone: "green",
   },
   {
@@ -55,9 +55,9 @@ const repoLayers = [
   },
   {
     index: "05",
-    title: "Explorer",
-    path: "site/",
-    body: "This public-facing map: a concise explanation of the project, its boundaries, and where it is going.",
+    title: "Distribution",
+    path: "starter/ + tools/",
+    body: "One small project manifest produces an integration prompt or portable, digest-pinned bundle.",
     tone: "red",
   },
 ];
@@ -121,42 +121,42 @@ const companionPillars = [
 const wants: Record<Horizon, Array<{ title: string; body: string; status: string }>> = {
   Now: [
     {
-      title: "Foundation contracts",
-      body: "Keep skills, profiles, task envelopes, evidence records, and orchestration patterns coherent and versioned.",
-      status: "Foundation shipped",
+      title: "Manifest to bundle",
+      body: "Select agents, optional skills, project-owned skills, and guides; generate a prompt, catalog snapshot, and exact lock.",
+      status: "Operational",
     },
     {
-      title: "Repository validation",
-      body: "Expand structural checks, link validation, public-safety scanning, and synthetic scenario coverage.",
-      status: "Active",
+      title: "Requests and approvals",
+      body: "Export a local capability proposal and bind a reviewer decision to the exact artifact digest.",
+      status: "Operational",
     },
     {
-      title: "Core handbook chapters",
-      body: "Turn the architecture into concise guidance on context, permissions, evaluation, security, and escalation.",
-      status: "Writing next",
+      title: "Drift and upgrades",
+      body: "Check, plan, approve, apply, validate, and record updates without an always-on service.",
+      status: "Operational",
     },
   ],
   Next: [
     {
-      title: "Reference orchestrator",
-      body: "A small framework-neutral runner that demonstrates task envelopes, handoffs, bounded retries, and termination.",
+      title: "Release package",
+      body: "Make the zero-dependency generator easier to install without changing downstream contracts.",
       status: "Planned",
     },
     {
-      title: "Policy gateway demo",
-      body: "A deterministic enforcement example with allow, deny, and human-escalation paths around agent actions.",
+      title: "GitHub transport adapters",
+      body: "Route the unchanged request and approval envelopes through issues or pull requests.",
       status: "Planned",
     },
     {
-      title: "Context stress fixtures",
-      body: "Synthetic tests for compaction, provenance loss, conflicting instructions, stale knowledge, and recovery.",
+      title: "Generated companion view",
+      body: "Render an agent or project surface directly from its manifest, lock, and evaluation evidence.",
       status: "Planned",
     },
   ],
   Later: [
     {
-      title: "Runtime adapters",
-      body: "Thin provider-specific mappings that preserve the handbook contracts without making the core provider-dependent.",
+      title: "Runtime and provider adapters",
+      body: "Thin mappings that preserve hub contracts without making the durable core provider-dependent.",
       status: "Exploration",
     },
     {
@@ -165,8 +165,8 @@ const wants: Record<Horizon, Array<{ title: string; body: string; status: string
       status: "Exploration",
     },
     {
-      title: "Companion site toolkit",
-      body: "A dependency-light view generated from each project manifest for skills, versions, updates, and structured requests.",
+      title: "Reference enforcement gateway",
+      body: "A deterministic example for permission, data-boundary, and external-action decisions.",
       status: "Exploration",
     },
   ],
@@ -226,12 +226,26 @@ export default function Home() {
     await navigator.clipboard.writeText(
       JSON.stringify(
         {
-          requestType: request.kind,
-          requestedCapability: request.title,
-          desiredOutcome: request.outcome,
-          dataBoundary: request.dataBoundary,
-          boundedAuthority: request.authority,
-          reviewRequired: ["public provenance", "permissions", "failure behavior", "validation"],
+          format: "open-agentic-handbook/capability-request@1",
+          request: {
+            id: request.id,
+            project_id: "replace-with-project-id",
+            kind: request.kind.toLowerCase(),
+            title: request.title,
+            outcome: request.outcome,
+            scope: {
+              included: ["Describe the smallest useful scope."],
+              excluded: ["Automatic installation or permission expansion."],
+            },
+            data_boundary: request.dataBoundary,
+            maximum_authority: [request.authority],
+            validation: ["Define at least one checkable acceptance criterion."],
+            transport: {
+              kind: "local-file",
+              destination: "hub-review-queue",
+            },
+            status: "proposed",
+          },
         },
         null,
         2,
@@ -248,14 +262,14 @@ export default function Home() {
           <span className="mark" aria-hidden="true">OA</span>
           <span>
             <strong>Open Agentic Handbook</strong>
-            <small>Architecture atlas</small>
+            <small>Lightweight agent distribution</small>
           </span>
         </a>
         <nav aria-label="Primary navigation">
           <a href="#architecture">Architecture</a>
-          <a href="#repository">Repository</a>
-          <a href="#companion">Site pattern</a>
-          <a href="#wants">Wants</a>
+          <a href="#distribution">Add to a repo</a>
+          <a href="#companion">Agents + skills</a>
+          <a href="#wants">Upgrades</a>
           <a href="#requests">Requests</a>
         </nav>
         <a className="header-cta" href="#requests">Add an idea <span aria-hidden="true">↘</span></a>
@@ -263,14 +277,14 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Open-source · framework-neutral · spec-driven</p>
-          <h1>Systems that scale<br />with <em>boundaries.</em></h1>
+          <p className="eyebrow"><span /> One canonical hub · tiny downstream footprint</p>
+          <h1>A clear hub.<br /><em>Light downstream.</em></h1>
           <p className="hero-deck">
-            A ground-up field guide for designing, coordinating, and evaluating agentic systems—paired with versioned building blocks that make the guidance testable.
+            A spec-driven handbook and distribution system for selecting only the agents, skills, and guides a project needs—then keeping them explainable, bounded, and up to date.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="#architecture">Explore the architecture <span>↓</span></a>
-            <a className="text-link" href="#wants">See what we want next <span>↗</span></a>
+            <a className="button primary" href="#distribution">Add it to a repo <span>↓</span></a>
+            <a className="text-link" href="#architecture">See the control model <span>↗</span></a>
           </div>
           <div className="metric-row" aria-label="Repository inventory">
             {metrics.map((metric) => (
@@ -283,7 +297,7 @@ export default function Home() {
         </div>
 
         <div className="system-map" aria-label="Layered agentic system architecture">
-          <div className="map-kicker"><span>Reference architecture</span><strong>v0.1</strong></div>
+          <div className="map-kicker"><span>Reference architecture</span><strong>v1.0</strong></div>
           <div className="authority-node">
             <span className="node-index">00</span>
             <div><small>Ultimate authority</small><strong>Human owner</strong></div>
@@ -313,6 +327,47 @@ export default function Home() {
           </div>
           <p className="map-note">Agents propose. Controls enforce. People remain accountable.</p>
         </div>
+      </section>
+
+      <section className="section distribution" id="distribution">
+        <div className="section-heading split">
+          <div><p className="eyebrow"><span /> Minimal adoption path</p><h2>Add only what the repo needs.</h2></div>
+          <p>The hub stays canonical. A downstream project keeps one small manifest and a generated prompt or portable bundle—no background service required.</p>
+        </div>
+        <div className="distribution-grid">
+          <div className="manifest-card">
+            <div><span>handbook.project.json</span><b>v1</b></div>
+            <pre><code>{`{
+  "project": { "id": "your-project" },
+  "release": "1.0.0",
+  "selection": {
+    "agents": ["builder", "security-governor", "verifier"],
+    "skills": {
+      "core": "agent-required",
+      "optional": [],
+      "project": []
+    },
+    "guides": ["orchestration", "updates"]
+  }
+}`}</code></pre>
+          </div>
+          <div className="adoption-steps">
+            <article><span>01</span><div><h3>Select</h3><p>Choose agents, optional hub skills, project skills, and concise guides.</p></div></article>
+            <article><span>02</span><div><h3>Bound</h3><p>Declare data, permissions, context behavior, and external side effects.</p></div></article>
+            <article><span>03</span><div><h3>Generate</h3><p>Produce <code>INTEGRATION.md</code>, a selected catalog, and a digest-pinned lock.</p></div></article>
+            <article><span>04</span><div><h3>Use</h3><p>Commit the small bundle or print only the integration prompt.</p></div></article>
+          </div>
+        </div>
+        <div className="command-card">
+          <span>ONE LOCAL COMMAND</span>
+          <code>npm run handbook -- generate --manifest /path/to/project/handbook.project.json --format bundle</code>
+        </div>
+        <div className="upgrade-track" aria-label="Approval-gated update workflow">
+          {["Check", "Plan", "Approve", "Apply", "Validate", "Record"].map((step, index) => (
+            <div key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < 5 && <i aria-hidden="true">→</i>}</div>
+          ))}
+        </div>
+        <p className="upgrade-note">A changed permission, data boundary, selected item, or content digest becomes a reviewable plan. Apply requires a human approval bound to that exact plan.</p>
       </section>
 
       <section className="section architecture" id="architecture">
@@ -346,8 +401,8 @@ export default function Home() {
       <section className="section repository" id="repository">
         <div className="section-heading">
           <p className="eyebrow"><span /> From principle to proof</p>
-          <h2>A repository with five connected layers.</h2>
-          <p>Each layer has one job. Together they make the project readable by people, composable by agents, and testable in automation.</p>
+          <h2>The hub owns the source of truth.</h2>
+          <p>Each layer has one job. Together they prevent registry drift, keep the contracts inspectable, and make downstream output reproducible.</p>
         </div>
         <div className="repo-grid">
           {repoLayers.map((layer) => (
@@ -355,7 +410,7 @@ export default function Home() {
               <div><span>{layer.index}</span><code>{layer.path}</code></div>
               <h3>{layer.title}</h3>
               <p>{layer.body}</p>
-              <a href="#wants" aria-label={`See roadmap for ${layer.title}`}>See roadmap <span>↗</span></a>
+              <a href="#distribution" aria-label={`See distribution flow for ${layer.title}`}>See the flow <span>↗</span></a>
             </article>
           ))}
         </div>
@@ -368,7 +423,7 @@ export default function Home() {
             <h2>Every agent and project should explain itself.</h2>
           </div>
           <div>
-            <p>A companion site is the human control surface for a capability: part documentation, part inventory, part request desk, and part governance record.</p>
+            <p>Every surface follows the same contract: identity, responsibilities, skills, dependencies, permissions, context, security, additions, requests, and evidence.</p>
             <a className="text-link" href="#requests">Draft a capability request <span>↓</span></a>
           </div>
         </div>
@@ -390,9 +445,9 @@ export default function Home() {
 
       <section className="section wants" id="wants">
         <div className="wants-intro">
-          <p className="eyebrow"><span /> Direction, not a backlog dump</p>
-          <h2>What we want<br /><em>to become.</em></h2>
-          <p>The first pass establishes the language, contracts, and safety rails. Expansion earns its way in through public provenance, synthetic evidence, and bounded authority.</p>
+          <p className="eyebrow"><span /> Honest release boundary</p>
+          <h2>Operational now.<br /><em>Adapters next.</em></h2>
+          <p>V1 is local-first and on demand. Future transports, signed approvals, runtime gateways, and generated project sites extend the contracts; they are not required to use them today.</p>
           <div className="horizon-tabs" role="tablist" aria-label="Roadmap horizon">
             {(Object.keys(wants) as Horizon[]).map((item) => (
               <button
@@ -423,7 +478,7 @@ export default function Home() {
         <div className="request-heading">
           <p className="eyebrow"><span /> Extend the system deliberately</p>
           <h2>Request a capability.</h2>
-          <p>Describe the intended outcome, operating constraints, and validation criteria. This first-pass composer creates a portable proposal and keeps it in this browser.</p>
+          <p>Describe the intended outcome and maximum authority. The composer creates the same portable v1 request shape used by the local command and keeps it in this browser.</p>
           <div className="request-safety">
             <strong>STRUCTURED REQUEST</strong>
             <span>Capture the capability, outcome, data boundary, maximum authority, and review criteria.</span>
@@ -436,10 +491,12 @@ export default function Home() {
             <label>
               What kind of addition is this?
               <select name="kind" defaultValue="Skill">
+                <option>Agent</option>
                 <option>Skill</option>
+                <option>Guide</option>
                 <option>Feature</option>
                 <option>Integration</option>
-                <option>Guide</option>
+                <option>Policy</option>
               </select>
             </label>
             <label>
@@ -469,7 +526,7 @@ export default function Home() {
               </label>
             </div>
             <button className="submit-request" type="submit">Add local draft <span>＋</span></button>
-            <small className="local-note">This draft remains in your browser. A future authenticated adapter can route approved proposals to the project’s issue tracker.</small>
+            <small className="local-note">This draft remains in your browser. Copy the JSON into the local request workflow; a future authenticated adapter can route the unchanged envelope.</small>
           </form>
 
           <div className="request-drafts">
@@ -505,7 +562,7 @@ export default function Home() {
       <section className="contribute" id="contribute">
         <div>
           <p className="eyebrow">A clean contribution contract</p>
-          <h2>Bring a concept, a public source, a synthetic example, or a failing test.</h2>
+          <h2>Bring a bounded request, a public source, a synthetic example, or a failing test.</h2>
         </div>
         <div>
           <p>A useful contribution includes public provenance and explains its permissions, data boundaries, failure behavior, human escalation, and validation.</p>

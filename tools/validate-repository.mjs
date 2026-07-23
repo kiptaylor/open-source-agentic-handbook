@@ -3,12 +3,18 @@ import { existsSync } from "node:fs";
 import { access, readFile, readdir } from "node:fs/promises";
 import { dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  loadRegistries,
+  validateCapabilityRequest,
+  validateManifest,
+} from "./handbook.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 export const repositoryRoot = resolve(toolDirectory, "..");
 
 const requiredPaths = [
   "catalog/registry.yaml",
+  "catalog/registries/releases.json",
   "catalog/skills/core",
   "catalog/profiles/control-plane",
   "catalog/orchestration-patterns",
@@ -16,8 +22,11 @@ const requiredPaths = [
   "docs/policies/PUBLIC_SOURCE_POLICY.md",
   "examples/validate-scenarios.mjs",
   "schemas/task-envelope.schema.json",
+  "schemas/project-manifest.schema.json",
   "site/app/page.tsx",
+  "starter/handbook.project.json",
   "templates/task-envelope.yaml",
+  "tools/handbook.mjs",
   "tests/repository",
 ];
 
@@ -72,7 +81,7 @@ export async function validateStructure() {
 export async function validateSchemas() {
   const schemaDirectory = join(repositoryRoot, "schemas");
   const names = (await readdir(schemaDirectory)).filter((name) => name.endsWith(".schema.json"));
-  if (names.length < 7) throw new Error("Expected at least seven contract schemas.");
+  if (names.length < 14) throw new Error("Expected at least fourteen contract schemas.");
 
   for (const name of names) {
     const schema = JSON.parse(await readFile(join(schemaDirectory, name), "utf8"));
@@ -137,7 +146,54 @@ export async function validateCatalog() {
     }
   }
 
-  return { skills: skillFiles.length, profiles: profileCount, patterns: patternNames.length };
+  const registries = await loadRegistries(repositoryRoot);
+  if (registries.releases.current !== registries.compatibility.release) {
+    throw new Error("Release and compatibility registries disagree.");
+  }
+  if (registries.agents.items.length !== profileCount) {
+    throw new Error("Agent registry and profile catalog counts disagree.");
+  }
+  if (registries.skills.items.length !== skillFiles.length) {
+    throw new Error("Skill registry and package counts disagree.");
+  }
+
+  for (const [name, registry] of Object.entries(registries)) {
+    const ids = (registry.items ?? []).map((item) => item.id).filter(Boolean);
+    if (new Set(ids).size !== ids.length) {
+      throw new Error(`${name} registry contains duplicate identifiers.`);
+    }
+    for (const item of registry.items ?? []) {
+      if (item.path && !(await exists(join(repositoryRoot, item.path)))) {
+        throw new Error(`${name} registry path does not exist: ${item.path}`);
+      }
+    }
+  }
+
+  return {
+    skills: skillFiles.length,
+    profiles: profileCount,
+    patterns: patternNames.length,
+    registries: Object.keys(registries).length,
+  };
+}
+
+export async function validateDistribution() {
+  const registries = await loadRegistries(repositoryRoot);
+  const starterPath = join(repositoryRoot, "starter/handbook.project.json");
+  const templatePath = join(repositoryRoot, "templates/project-manifest.json");
+  const requestPath = join(repositoryRoot, "templates/capability-request.json");
+  const starter = JSON.parse(await readFile(starterPath, "utf8"));
+  const template = JSON.parse(await readFile(templatePath, "utf8"));
+  const request = JSON.parse(await readFile(requestPath, "utf8"));
+
+  await validateManifest(starter, starterPath, registries);
+  await validateManifest(template, templatePath, registries);
+  validateCapabilityRequest(request, template.project.id);
+  return {
+    manifests: 2,
+    requests: 1,
+    release: registries.releases.current,
+  };
 }
 
 export async function validateScenarios() {
@@ -238,8 +294,9 @@ export async function validateRepository() {
   const catalog = await validateCatalog();
   const scenarios = await validateScenarios();
   const links = await validateMarkdownLinks();
+  const distribution = await validateDistribution();
   const safety = await scanPublicSafety();
-  return { structure, schemas, catalog, scenarios, links, safety };
+  return { structure, schemas, catalog, scenarios, links, distribution, safety };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -248,7 +305,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     console.log(
       `Validated ${result.safety.files} files, ${result.catalog.skills} skills, ` +
         `${result.catalog.profiles} profiles, ${result.catalog.patterns} patterns, ` +
-        `${result.schemas} schemas, ${result.scenarios} scenarios, and ${result.links} links.`,
+        `${result.catalog.registries} registries, ${result.schemas} schemas, ` +
+        `${result.scenarios} scenarios, ${result.distribution.manifests} manifests, ` +
+        `and ${result.links} links.`,
     );
   } catch (error) {
     console.error(error instanceof Error ? error.message : error);

@@ -1,0 +1,132 @@
+{
+  "registry": "skills",
+  "schema_version": 1,
+  "release": "1.0.0",
+  "buckets": {
+    "core": "Derived from selected agents and always included.",
+    "optional": "Selected role, workflow, policy, or tool-adapter packages.",
+    "project": "Owned by the downstream repository and recorded in its manifest."
+  },
+  "items": [
+    {
+      "id": "scope-and-instruction-handling",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/scope-and-instruction-handling",
+      "summary": "Resolve instructions inside the active scope and pause on material conflict."
+    },
+    {
+      "id": "public-source-boundaries",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/public-source-boundaries",
+      "summary": "Keep public work grounded in approved public or synthetic sources."
+    },
+    {
+      "id": "planning-and-termination",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/planning-and-termination",
+      "summary": "Plan bounded work, track budgets, and stop at explicit terminal conditions."
+    },
+    {
+      "id": "safe-tool-use",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/safe-tool-use",
+      "summary": "Use tools with least authority, resolved targets, and safe failure behavior."
+    },
+    {
+      "id": "evidence-and-validation",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/evidence-and-validation",
+      "summary": "Pair claims and implementation results with checkable evidence."
+    },
+    {
+      "id": "failure-recovery",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/failure-recovery",
+      "summary": "Recover within retry limits, preserve evidence, and escalate safely."
+    },
+    {
+      "id": "human-escalation",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/human-escalation",
+      "summary": "Pause and request human judgment when authority or material ambiguity changes."
+    },
+    {
+      "id": "state-and-memory-hygiene",
+      "version": "0.1.0",
+      "bucket": "core",
+      "status": "foundation",
+      "path": "catalog/skills/core/state-and-memory-hygiene",
+      "summary": "Keep state explicit, provenance-aware, minimal, and resumable."
+    },
+    {
+      "id": "researcher",
+      "version": "0.1.0",
+      "bucket": "role",
+      "status": "foundation",
+      "path": "catalog/skills/roles/researcher",
+      "summary": "Collect and synthesize bounded public evidence."
+    },
+    {
+      "id": "writer",
+      "version": "0.1.0",
+      "bucket": "role",
+      "status": "foundation",
+      "path": "catalog/skills/roles/writer",
+      "summary": "Draft clear guidance from an approved brief and evidence set."
+    },
+    {
+      "id": "reviewer",
+      "version": "0.1.0",
+      "bucket": "role",
+      "status": "foundation",
+      "path": "catalog/skills/roles/reviewer",
+      "summary": "Review artifacts independently against policy and acceptance criteria."
+    },
+    {
+      "id": "builder",
+      "version": "0.1.0",
+      "bucket": "role",
+      "status": "foundation",
+      "path": "catalog/skills/roles/builder",
+      "summary": "Implement and test an approved design without expanding scope."
+    },
+    {
+      "id": "maintainer",
+      "version": "0.1.0",
+      "bucket": "role",
+      "status": "foundation",
+      "path": "catalog/skills/roles/maintainer",
+      "summary": "Review compatibility, releases, and time-sensitive guidance."
+    },
+    {
+      "id": "public-knowledge-transfer",
+      "version": "0.1.0",
+      "bucket": "workflow",
+      "status": "foundation",
+      "path": "catalog/skills/workflows/public-knowledge-transfer",
+      "summary": "Turn approved public evidence into a reviewable public artifact."
+    },
+    {
+      "id": "public-source-publication",
+      "version": "0.1.0",
+      "bucket": "policy",
+      "status": "foundation",
+      "path": "catalog/skills/policies/public-source-publication",
+      "summary": "Apply the repository public-source and publication boundary."
+    }
+  ]
+}

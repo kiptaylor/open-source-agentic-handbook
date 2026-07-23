@@ -10,7 +10,10 @@ assets without granting runtime authority by itself.
 - [`profiles/`](profiles/README.md) assembles bounded agent roles.
 - [`orchestration-patterns/`](orchestration-patterns/README.md) defines supported
   coordination shapes.
-- [`registry.yaml`](registry.yaml) indexes released definitions.
+- [`registry.yaml`](registry.yaml) is the concise top-level index.
+- [`registries/`](registries/README.md) contains the canonical agent, skill,
+  policy, guide, release, compatibility, and request registries used by the
+  downstream generator.
 - [`public-assets.json`](public-assets.json) records reviewed binary assets.
 
 Every catalog item is public-safe, versioned, independently reviewable, and

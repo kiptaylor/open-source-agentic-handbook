@@ -1,0 +1,35 @@
+{
+  "$schema": "../schemas/capability-request.schema.json",
+  "format": "open-agentic-handbook/capability-request@1",
+  "request": {
+    "id": "synthetic-dependency-guide",
+    "project_id": "synthetic-project",
+    "kind": "guide",
+    "title": "Dependency review guide",
+    "outcome": "Help a maintainer identify incompatible dependency changes before a release.",
+    "scope": {
+      "included": [
+        "declared project dependencies",
+        "public release notes"
+      ],
+      "excluded": [
+        "automatic package changes",
+        "external publication"
+      ]
+    },
+    "data_boundary": "Approved project metadata and public sources only.",
+    "maximum_authority": [
+      "read declared dependency metadata",
+      "write a local review report"
+    ],
+    "validation": [
+      "A synthetic compatibility change is detected.",
+      "No package or permission is changed by the request."
+    ],
+    "transport": {
+      "kind": "local-file",
+      "destination": "hub-review-queue"
+    },
+    "status": "proposed"
+  }
+}

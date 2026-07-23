@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/request-export.schema.json",
+  "title": "Capability request export",
+  "type": "object",
+  "required": [
+    "format",
+    "hub_release",
+    "exported_at",
+    "source",
+    "routing",
+    "request",
+    "digest"
+  ],
+  "properties": {
+    "format": { "const": "open-agentic-handbook/request-export@1" },
+    "hub_release": { "type": "string" },
+    "exported_at": { "type": "string", "format": "date-time" },
+    "source": {
+      "type": "object",
+      "required": ["project_id", "manifest_digest"]
+    },
+    "routing": {
+      "type": "object",
+      "required": ["contract_version", "transport"]
+    },
+    "request": {
+      "type": "object",
+      "required": [
+        "id",
+        "project_id",
+        "kind",
+        "outcome",
+        "maximum_authority",
+        "transport"
+      ]
+    },
+    "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}

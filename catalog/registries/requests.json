@@ -1,0 +1,23 @@
+{
+  "registry": "requests",
+  "schema_version": 1,
+  "release": "1.0.0",
+  "states": [
+    "proposed",
+    "triaged",
+    "accepted",
+    "deferred",
+    "rejected",
+    "released"
+  ],
+  "transport_contract": {
+    "version": 1,
+    "default": "local-file",
+    "future_adapters": [
+      "github-issue",
+      "github-pull-request",
+      "authenticated-webhook"
+    ]
+  },
+  "items": []
+}

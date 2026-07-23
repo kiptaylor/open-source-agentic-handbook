@@ -1,6 +1,7 @@
 profile:
   id: synthetic-reviewer
   version: 0.1.0
+  class: worker
   role: Review a synthetic handbook artifact against an approved checklist.
 
 skills:
@@ -10,10 +11,10 @@ skills:
     - evidence-and-validation
     - human-escalation
   policies:
-    - public-source-publication-policy
+    - public-source-publication
   role_pack: reviewer
   workflows:
-    - public-artifact-review
+    - public-knowledge-transfer
   tool_adapters: []
 
 authority:

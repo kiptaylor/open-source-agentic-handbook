@@ -1,0 +1,24 @@
+{
+  "registry": "compatibility",
+  "schema_version": 1,
+  "release": "1.0.0",
+  "rules": {
+    "major": "May change manifest, lock, or adapter contracts and requires an explicit migration.",
+    "minor": "Adds backward-compatible catalog items or optional fields.",
+    "patch": "Clarifies or fixes compatible content without expanding authority.",
+    "item_pins": "Generated locks pin every selected item by version and content digest.",
+    "project_skills": "Project-owned skills remain the downstream repository's responsibility."
+  },
+  "matrix": [
+    {
+      "hub_release": "1.0.0",
+      "manifest_schema": 1,
+      "lock_schema": 1,
+      "request_schema": 1,
+      "approval_schema": 1,
+      "update_plan_schema": 1,
+      "node": ">=22",
+      "status": "supported"
+    }
+  ]
+}

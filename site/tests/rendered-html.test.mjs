@@ -28,12 +28,16 @@ test("server-renders the public handbook explainer", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Open Agentic Handbook \| Systems that scale with boundaries<\/title>/i);
-  assert.match(html, /Systems that scale/);
+  assert.match(html, /<title>Open Agentic Handbook \| One hub, light downstream<\/title>/i);
+  assert.match(html, /A clear hub/);
+  assert.match(html, /Add only what the repo needs/);
   assert.match(html, /The orchestration model/);
   assert.match(html, /spec-driven/i);
   assert.match(html, /Every agent and project should explain itself/);
-  assert.match(html, /What we want/);
+  assert.match(html, /Operational now/);
+  assert.match(html, /Check/);
+  assert.match(html, /Approve/);
+  assert.match(html, /Record/);
   assert.match(html, /Request a capability/);
   assert.match(html, /This draft remains in your browser/);
   assert.doesNotMatch(html, /Add candidate|Export manifest|Transfer Desk/);

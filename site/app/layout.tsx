@@ -22,20 +22,20 @@ export async function generateMetadata(): Promise<Metadata> {
   const socialImage = new URL("/og.png", origin).toString();
 
   return {
-    title: "Open Agentic Handbook | Systems that scale with boundaries",
+    title: "Open Agentic Handbook | One hub, light downstream",
     description:
-      "A spec-driven field guide and tested foundation for designing, coordinating, and evaluating agentic systems.",
+      "A spec-driven handbook and lightweight distribution system for bounded agents, skills, requests, approvals, and upgrades.",
     openGraph: {
       title: "Open Agentic Handbook",
       description:
-        "A ground-up field guide for agentic systems that scale with boundaries.",
+        "One canonical hub. A tiny downstream manifest. Bounded agents and approval-gated updates.",
       type: "website",
       images: [{ url: socialImage, width: 1536, height: 1024 }],
     },
     twitter: {
       card: "summary_large_image",
       title: "Open Agentic Handbook",
-      description: "Systems that scale with boundaries.",
+      description: "One canonical hub. A tiny downstream manifest.",
       images: [socialImage],
     },
   };

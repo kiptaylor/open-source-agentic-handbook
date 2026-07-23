@@ -1,0 +1,43 @@
+{
+  "registry": "guides",
+  "schema_version": 1,
+  "release": "1.0.0",
+  "items": [
+    {
+      "id": "foundation",
+      "version": "1.0.0",
+      "path": "docs/foundations/FOUNDATION.md",
+      "summary": "System layers, authority boundaries, and the default safety position."
+    },
+    {
+      "id": "orchestration",
+      "version": "1.0.0",
+      "path": "docs/orchestration/OVERVIEW.md",
+      "summary": "Task envelopes, control-plane roles, handoffs, escalation, and termination."
+    },
+    {
+      "id": "skills-and-profiles",
+      "version": "1.0.0",
+      "path": "docs/skills-and-profiles/OVERVIEW.md",
+      "summary": "Skill buckets, profile composition, permissions, context, and validation."
+    },
+    {
+      "id": "distribution",
+      "version": "1.0.0",
+      "path": "docs/distribution/README.md",
+      "summary": "Tiny downstream manifests, generated prompts, portable bundles, and local request exports."
+    },
+    {
+      "id": "updates",
+      "version": "1.0.0",
+      "path": "docs/distribution/LIFECYCLE.md",
+      "summary": "Version rules and the check, plan, approve, apply, validate, record workflow."
+    },
+    {
+      "id": "public-source-policy",
+      "version": "1.0.0",
+      "path": "docs/policies/PUBLIC_SOURCE_POLICY.md",
+      "summary": "Contribution provenance and public-safety review."
+    }
+  ]
+}
