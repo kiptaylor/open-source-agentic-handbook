@@ -877,6 +877,208 @@ export async function exportCapabilityRequest(
   return { path: outputPath, request: exported };
 }
 
+export function validateRequestExport(record) {
+  if (record.format !== "open-agentic-handbook/request-export@1") {
+    fail("Request export format must be open-agentic-handbook/request-export@1.");
+  }
+  const { digest, ...unsigned } = record;
+  if (typeof digest !== "string" || digest !== digestValue(unsigned)) {
+    fail("Request export digest does not match its content.");
+  }
+  requireObject(record.source, "source");
+  requireString(record.source.project_id, "source.project_id");
+  requireString(record.source.manifest_digest, "source.manifest_digest");
+  requireObject(record.routing, "routing");
+  if (record.routing.contract_version !== 1) {
+    fail("Request export transport contract must be version 1.");
+  }
+  requireObject(record.routing.transport, "routing.transport");
+  const request = validateCapabilityRequest(
+    {
+      format: "open-agentic-handbook/capability-request@1",
+      request: record.request,
+    },
+    record.source.project_id,
+  );
+  if (digestValue(record.routing.transport) !== digestValue(request.transport)) {
+    fail("Request export routing does not match the requested transport.");
+  }
+  return record;
+}
+
+export async function receiveCapabilityRequest(
+  exportPath,
+  {
+    inbox = join(repositoryRoot, ".handbook", "requests", "inbox"),
+  } = {},
+) {
+  const record = validateRequestExport(await readJson(resolve(exportPath)));
+  const inboxPath = resolve(inbox);
+  const receivedPath = join(
+    inboxPath,
+    `${record.request.id}.${record.digest.slice(0, 12)}.request.json`,
+  );
+  await writeJson(receivedPath, record);
+  return {
+    path: receivedPath,
+    requestId: record.request.id,
+    requestDigest: record.digest,
+    projectId: record.source.project_id,
+  };
+}
+
+export function createCapabilityRequestDecision(
+  requestExport,
+  {
+    reviewer,
+    decision,
+    reason,
+    nextAction,
+    now = new Date(),
+  },
+) {
+  validateRequestExport(requestExport);
+  requireString(reviewer, "reviewer");
+  requireString(reason, "reason");
+  if (!["approved", "rejected"].includes(decision)) {
+    fail("Capability request decision must be approved or rejected.");
+  }
+  if (nextAction !== undefined) requireString(nextAction, "nextAction");
+  const conditions = [`Reason: ${reason}`];
+  if (nextAction) conditions.push(`Next action: ${nextAction}`);
+  return {
+    format: "open-agentic-handbook/approval@1",
+    approval: {
+      id: `approval-${digestValue({
+        request: requestExport.digest,
+        reviewer,
+        decision,
+        decided_at: now.toISOString(),
+      }).slice(0, 16)}`,
+      subject_type: "capability-request",
+      subject_id: requestExport.request.id,
+      subject_digest: requestExport.digest,
+      decision,
+      reviewer,
+      decided_at: now.toISOString(),
+      conditions,
+    },
+  };
+}
+
+export async function decideCapabilityRequest(
+  exportPath,
+  {
+    reviewer,
+    decision,
+    reason,
+    nextAction,
+    output,
+    now = new Date(),
+  },
+) {
+  const requestExport = validateRequestExport(await readJson(resolve(exportPath)));
+  const decisionRecord = createCapabilityRequestDecision(requestExport, {
+    reviewer,
+    decision,
+    reason,
+    nextAction,
+    now,
+  });
+  const outputPath = output
+    ? resolve(output)
+    : join(
+        repositoryRoot,
+        ".handbook",
+        "requests",
+        "outbox",
+        `${requestExport.request.id}.${requestExport.digest.slice(0, 12)}.decision.json`,
+      );
+  await writeJson(outputPath, decisionRecord);
+  return {
+    path: outputPath,
+    requestId: requestExport.request.id,
+    requestDigest: requestExport.digest,
+    decision: decisionRecord.approval.decision,
+  };
+}
+
+export function validateCapabilityRequestDecision(
+  decisionRecord,
+  requestExport,
+) {
+  validateRequestExport(requestExport);
+  if (
+    decisionRecord.format !== "open-agentic-handbook/approval@1" ||
+    !isObject(decisionRecord.approval)
+  ) {
+    fail("Capability request decision must be an approval@1 record.");
+  }
+  const approval = decisionRecord.approval;
+  for (const key of [
+    "id",
+    "subject_type",
+    "subject_id",
+    "subject_digest",
+    "decision",
+    "reviewer",
+    "decided_at",
+  ]) {
+    requireString(approval[key], `approval.${key}`);
+  }
+  requireStringArray(approval.conditions, "approval.conditions");
+  if (
+    approval.subject_type !== "capability-request" ||
+    approval.subject_id !== requestExport.request.id ||
+    approval.subject_digest !== requestExport.digest
+  ) {
+    fail("Capability request decision does not match the exact request export.");
+  }
+  if (!["approved", "rejected"].includes(approval.decision)) {
+    fail("Capability request decision must be approved or rejected.");
+  }
+  return decisionRecord;
+}
+
+export async function syncCapabilityRequestDecision(
+  manifestPath,
+  exportPath,
+  decisionPath,
+  {
+    output,
+    registries,
+  } = {},
+) {
+  registries ??= await loadRegistries();
+  const resolvedManifestPath = resolve(manifestPath);
+  const manifest = await readJson(resolvedManifestPath);
+  await validateManifest(manifest, resolvedManifestPath, registries);
+  const requestExport = validateRequestExport(await readJson(resolve(exportPath)));
+  if (requestExport.source.project_id !== manifest.project.id) {
+    fail("Request export belongs to a different downstream project.");
+  }
+  const decisionRecord = validateCapabilityRequestDecision(
+    await readJson(resolve(decisionPath)),
+    requestExport,
+  );
+  const bundleDirectory = resolveBundleDirectory(manifest, resolvedManifestPath);
+  const outputPath = output
+    ? resolve(output)
+    : join(
+        bundleDirectory,
+        "responses",
+        `${requestExport.request.id}.decision.json`,
+      );
+  await writeJson(outputPath, decisionRecord);
+  return {
+    path: outputPath,
+    requestId: requestExport.request.id,
+    requestDigest: requestExport.digest,
+    decision: decisionRecord.approval.decision,
+    reviewer: decisionRecord.approval.reviewer,
+  };
+}
+
 function parseArguments(argv) {
   const [command, ...tokens] = argv;
   const options = {};
@@ -904,6 +1106,9 @@ function help() {
     "Commands:",
     "  generate --manifest PATH [--format prompt|bundle] [--output PATH]",
     "  request  --manifest PATH --request PATH [--output PATH]",
+    "  receive-request --export PATH [--inbox PATH]",
+    "  decide-request --export PATH --reviewer NAME --decision approved|rejected --reason TEXT [--next-action TEXT] [--output PATH]",
+    "  sync-decision --manifest PATH --export PATH --decision PATH [--output PATH]",
     "  check    --manifest PATH [--lock PATH] [--plan PATH]",
     "  approve  --plan PATH --reviewer NAME --decision approved|rejected [--output PATH]",
     "  apply    --manifest PATH --plan PATH --approval PATH [--output PATH]",
@@ -933,6 +1138,34 @@ export async function runCli(argv = process.argv.slice(2)) {
       { output: options.output },
     );
     return `Exported request to ${result.path}`;
+  }
+
+  if (command === "receive-request") {
+    const result = await receiveCapabilityRequest(need(options, "export"), {
+      inbox: options.inbox,
+    });
+    return `Received ${result.requestId} from ${result.projectId} at ${result.path}`;
+  }
+
+  if (command === "decide-request") {
+    const result = await decideCapabilityRequest(need(options, "export"), {
+      reviewer: need(options, "reviewer"),
+      decision: need(options, "decision"),
+      reason: need(options, "reason"),
+      nextAction: options["next-action"],
+      output: options.output,
+    });
+    return `Recorded ${result.decision} decision for ${result.requestId} at ${result.path}`;
+  }
+
+  if (command === "sync-decision") {
+    const result = await syncCapabilityRequestDecision(
+      need(options, "manifest"),
+      need(options, "export"),
+      need(options, "decision"),
+      { output: options.output },
+    );
+    return `Synced ${result.decision} decision for ${result.requestId} to ${result.path}`;
   }
 
   if (command === "check") {

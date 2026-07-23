@@ -75,6 +75,9 @@ workflow:
 npm run handbook -- help
 ```
 
+The backend-free child-to-hub request and response flow is documented in
+[Lightweight Distribution](docs/distribution/README.md#local-round-trip).
+
 ## Project structure
 
 - [`docs/`](docs/README.md) is the human-readable handbook.

@@ -59,6 +59,40 @@ proposal, not an installation or permission grant. The envelope includes a
 stable transport contract so a GitHub issue, pull request, or authenticated
 service adapter can route the same record later.
 
+### Local round trip
+
+The v1 local adapter proves the full child-to-hub connection without a backend:
+
+```sh
+# In or for the child repository: create the signed-by-digest export.
+npm run handbook -- request \
+  --manifest /path/to/child/handbook.project.json \
+  --request /path/to/child/requests/capability-request.json
+
+# In the hub: validate and receive the exact export.
+npm run handbook -- receive-request \
+  --export /path/to/child/.agentic/requests/request-id.request.json
+
+# In the hub: return a human decision bound to that request digest.
+npm run handbook -- decide-request \
+  --export /path/to/child/.agentic/requests/request-id.request.json \
+  --reviewer designated-maintainer \
+  --decision approved \
+  --reason "The outcome and authority are bounded." \
+  --next-action "Draft the accepted catalog addition."
+
+# In or for the child: verify and store the matching decision.
+npm run handbook -- sync-decision \
+  --manifest /path/to/child/handbook.project.json \
+  --export /path/to/child/.agentic/requests/request-id.request.json \
+  --decision /path/to/hub/.handbook/requests/outbox/request-decision.json
+```
+
+The hub inbox and outbox live under ignored `.handbook/` state. The child keeps
+its own request and response artifacts. Receipt or approval does not install a
+capability; it proves identity, digest, routing, and reviewer decision across
+the repository boundary.
+
 ## Approval boundary
 
 Requests and update plans bind review to a SHA-256 digest. The local `approve`

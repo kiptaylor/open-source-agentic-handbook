@@ -13,6 +13,12 @@
   "transport_contract": {
     "version": 1,
     "default": "local-file",
+    "local_flow": [
+      "request",
+      "receive-request",
+      "decide-request",
+      "sync-decision"
+    ],
     "future_adapters": [
       "github-issue",
       "github-pull-request",

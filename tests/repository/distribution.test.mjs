@@ -6,10 +6,13 @@ import test from "node:test";
 import {
   applyUpdate,
   checkDrift,
+  decideCapabilityRequest,
   createApproval,
   digestValue,
   exportCapabilityRequest,
   generateIntegration,
+  receiveCapabilityRequest,
+  syncCapabilityRequestDecision,
   validateBundle,
 } from "../../tools/handbook.mjs";
 
@@ -108,6 +111,50 @@ test("downstream generation, request export, and approval-gated update work end 
     const { digest, ...unsigned } = requestExport;
     assert.equal(digest, digestValue(unsigned));
     assert.equal(requestExport.routing.transport.kind, "local-file");
+
+    const tamperedPath = join(directory, "tampered-request.json");
+    await writeJson(tamperedPath, {
+      ...requestExport,
+      request: {
+        ...requestExport.request,
+        outcome: "A changed outcome that was not part of the exported digest.",
+      },
+    });
+    await assert.rejects(
+      receiveCapabilityRequest(tamperedPath, {
+        inbox: join(directory, "hub", "inbox"),
+      }),
+      /digest does not match/i,
+    );
+
+    const received = await receiveCapabilityRequest(exported.path, {
+      inbox: join(directory, "hub", "inbox"),
+    });
+    assert.equal(received.requestDigest, requestExport.digest);
+    assert.equal(received.projectId, "synthetic-lifecycle");
+
+    const decided = await decideCapabilityRequest(received.path, {
+      reviewer: "designated-maintainer",
+      decision: "approved",
+      reason: "The request is bounded and has checkable acceptance criteria.",
+      nextAction: "Draft the synthetic guide as a separately reviewed change.",
+      output: join(directory, "hub", "outbox", "request-decision.json"),
+      now: new Date("2030-01-01T00:07:00.000Z"),
+    });
+    assert.equal(decided.requestDigest, requestExport.digest);
+    assert.equal(decided.decision, "approved");
+
+    const synced = await syncCapabilityRequestDecision(
+      manifestPath,
+      exported.path,
+      decided.path,
+      {
+        output: join(directory, ".agentic", "responses", "request-decision.json"),
+      },
+    );
+    assert.equal(synced.requestDigest, requestExport.digest);
+    assert.equal(synced.decision, "approved");
+    assert.equal(synced.reviewer, "designated-maintainer");
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
