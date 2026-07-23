@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Open Agentic Handbook | Systems that scale with boundaries",
     description:
-      "A public-safe field guide and tested foundation for designing, coordinating, and evaluating agentic systems.",
+      "A spec-driven field guide and tested foundation for designing, coordinating, and evaluating agentic systems.",
     openGraph: {
       title: "Open Agentic Handbook",
       description:

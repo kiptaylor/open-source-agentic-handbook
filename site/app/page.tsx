@@ -165,9 +165,9 @@ const wants: Record<Horizon, Array<{ title: string; body: string; status: string
       status: "Exploration",
     },
     {
-      title: "Optional media intake",
-      body: "A separate, gated system for consent, isolation, redaction, provenance, human approval, and deletion—never raw media in this public repository.",
-      status: "Separate system",
+      title: "Companion site toolkit",
+      body: "A dependency-light view generated from each project manifest for skills, versions, updates, and structured requests.",
+      status: "Exploration",
     },
   ],
 };
@@ -263,7 +263,7 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Open-source · framework-neutral · public-safe</p>
+          <p className="eyebrow"><span /> Open-source · framework-neutral · spec-driven</p>
           <h1>Systems that scale<br />with <em>boundaries.</em></h1>
           <p className="hero-deck">
             A ground-up field guide for designing, coordinating, and evaluating agentic systems—paired with versioned building blocks that make the guidance testable.
@@ -312,23 +312,6 @@ export default function Home() {
             <div><b>ALLOW</b><b>DENY</b><b>ESCALATE</b></div>
           </div>
           <p className="map-note">Agents propose. Controls enforce. People remain accountable.</p>
-        </div>
-      </section>
-
-      <section className="boundary-band" id="foundation">
-        <div className="boundary-lead">
-          <span className="seal" aria-hidden="true">✓</span>
-          <div><p className="eyebrow">The public boundary</p><h2>Built in public,<br /><em>from first principles.</em></h2></div>
-        </div>
-        <div className="boundary-copy">
-          <p>This repository is a new public work—not a mirror, exporter, or cleaned copy of another knowledge base.</p>
-          <div className="not-list">
-            <span>NO PRIVATE NOTES</span>
-            <span>NO RAW RECORDINGS</span>
-            <span>NO REAL IDENTITIES</span>
-            <span>NO PROPRIETARY EXAMPLES</span>
-          </div>
-          <small>External technical claims use public, preferably primary, sources. Examples are synthetic and created for this project.</small>
         </div>
       </section>
 
@@ -440,10 +423,10 @@ export default function Home() {
         <div className="request-heading">
           <p className="eyebrow"><span /> Extend the system deliberately</p>
           <h2>Request a capability.</h2>
-          <p>Describe the outcome and its boundaries—not private source material. This first-pass composer creates a portable proposal and keeps it only in this browser.</p>
+          <p>Describe the intended outcome, operating constraints, and validation criteria. This first-pass composer creates a portable proposal and keeps it in this browser.</p>
           <div className="request-safety">
-            <strong>PUBLIC-SAFE METADATA ONLY</strong>
-            <span>Do not enter private notes, names, recordings, customer data, credentials, or internal links.</span>
+            <strong>STRUCTURED REQUEST</strong>
+            <span>Capture the capability, outcome, data boundary, maximum authority, and review criteria.</span>
           </div>
         </div>
 
@@ -486,7 +469,7 @@ export default function Home() {
               </label>
             </div>
             <button className="submit-request" type="submit">Add local draft <span>＋</span></button>
-            <small className="local-note">Nothing is uploaded or submitted. A future authenticated adapter can route approved proposals to the project’s issue tracker.</small>
+            <small className="local-note">This draft remains in your browser. A future authenticated adapter can route approved proposals to the project’s issue tracker.</small>
           </form>
 
           <div className="request-drafts">
@@ -525,7 +508,7 @@ export default function Home() {
           <h2>Bring a concept, a public source, a synthetic example, or a failing test.</h2>
         </div>
         <div>
-          <p>Do not bring private material. A useful contribution explains its permissions, data boundaries, failure behavior, human escalation, and how to validate it.</p>
+          <p>A useful contribution includes public provenance and explains its permissions, data boundaries, failure behavior, human escalation, and validation.</p>
           <a className="button light" href="#repository">Start with the repository map <span>↗</span></a>
         </div>
       </section>
@@ -533,7 +516,7 @@ export default function Home() {
       <footer>
         <a className="wordmark footer-mark" href="#top">
           <span className="mark">OA</span>
-          <span><strong>Open Agentic Handbook</strong><small>Ground-up · public-safe · Apache-2.0</small></span>
+          <span><strong>Open Agentic Handbook</strong><small>Spec-driven · framework-neutral · Apache-2.0</small></span>
         </a>
         <p>Agents propose. Controls enforce. People remain accountable.</p>
         <a href="#top">Back to top ↑</a>

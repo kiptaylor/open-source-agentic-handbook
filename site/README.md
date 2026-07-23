@@ -5,12 +5,9 @@ repository layers, orchestration model, control-plane roles, current
 foundation, Now / Next / Later direction, and the companion-site pattern for
 explaining and extending agents and projects.
 
-The capability request composer stores concept-level drafts only in the local
-browser and can copy a structured proposal for review. It does not upload or
-submit requests and is not a content-transfer or source-material intake tool.
-Any future shared submission requires an authenticated, approved adapter. Any
-future media intake must be a separate gated system with consent, isolation,
-redaction, provenance, human approval, and deletion controls.
+The capability request composer keeps concept-level drafts in the local
+browser and can copy a structured proposal for review. Shared submission will
+require an authenticated, approved adapter with validation and human approval.
 
 ## Local development
 

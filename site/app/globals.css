@@ -142,16 +142,6 @@ h1 em, h2 em { color: var(--green); font-weight: 400; }
 .enforcement-node b:nth-child(3) { color: #f3d29a; }
 .map-note { margin: 15px 0 0; color: var(--ink-soft); font-family: var(--serif); font-size: 12px; font-style: italic; text-align: center; }
 
-.boundary-band { padding: 61px clamp(24px, 6vw, 96px); display: grid; grid-template-columns: .85fr 1.15fr; gap: 8vw; background: var(--ink); color: white; }
-.boundary-lead { display: flex; align-items: flex-start; gap: 24px; }
-.seal { display: grid; place-items: center; flex: 0 0 auto; width: 46px; height: 46px; border: 1px solid #6f8397; border-radius: 50%; color: #8bd3b4; }
-.boundary-band .eyebrow { color: #8bd3b4; margin-bottom: 12px; }
-.boundary-band h2 { margin: 0; font-size: clamp(37px, 4.5vw, 60px); line-height: .98; }
-.boundary-copy > p { max-width: 670px; margin: 0; color: #d6dde4; font-family: var(--serif); font-size: 19px; line-height: 1.5; }
-.not-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 24px 0 17px; }
-.not-list span { padding: 7px 9px; border: 1px solid #42566b; color: #b8c5d1; font-family: var(--font-geist-mono), monospace; font-size: 8px; letter-spacing: .08em; }
-.boundary-copy small { display: block; max-width: 720px; color: #98a7b5; font-size: 11px; line-height: 1.7; }
-
 .section { padding: clamp(80px, 10vw, 145px) clamp(24px, 6vw, 96px); }
 .section-heading { max-width: 790px; margin-bottom: 54px; }
 .section-heading.split { max-width: none; display: grid; grid-template-columns: 1fr .75fr; gap: 9vw; align-items: end; }
@@ -300,9 +290,7 @@ footer > a:last-child { color: #b8c3cd; font-size: 10px; font-weight: 700; text-
   .map-nodes.three { grid-template-columns: 1fr; }
   .map-nodes span { text-align: left; }
   .enforcement-node { align-items: flex-start; flex-direction: column; }
-  .boundary-band, .section-heading.split, .companion-heading, .request-heading, .contribute { grid-template-columns: 1fr; }
-  .boundary-band { gap: 42px; }
-  .boundary-lead { flex-direction: column; }
+  .section-heading.split, .companion-heading, .request-heading, .contribute { grid-template-columns: 1fr; }
   .flow { grid-template-columns: 1fr; gap: 9px; }
   .flow > i { transform: rotate(90deg); }
   .flow-step { min-height: 140px; }
