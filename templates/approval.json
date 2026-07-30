@@ -1,0 +1,16 @@
+{
+  "$schema": "../schemas/approval.schema.json",
+  "format": "open-agentic-handbook/approval@1",
+  "approval": {
+    "id": "approval-synthetic-update",
+    "subject_type": "update-plan",
+    "subject_id": "update-synthetic-project",
+    "subject_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "decision": "approved",
+    "reviewer": "designated-maintainer",
+    "decided_at": "2030-01-01T00:00:00.000Z",
+    "conditions": [
+      "Run the generated validation steps before recording completion."
+    ]
+  }
+}

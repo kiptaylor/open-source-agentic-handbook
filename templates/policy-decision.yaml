@@ -1,0 +1,26 @@
+policy_decision:
+  id: synthetic-policy-decision-001
+  task_id: synthetic-task-001
+  evaluated_by: synthetic-security-governor
+  task_revision: 1
+
+request:
+  action: Read an additional source.
+  tool: local-file-read
+  data_classification: public
+  external_side_effect: false
+
+result:
+  decision: deny
+  rule: Sources must appear in the approved task envelope.
+  reason: The requested source is not currently approved.
+  required_next_step: Submit a scope-expansion request.
+
+enforcement:
+  gateway: source-allowlist
+  expected_behavior: Block access until a new task revision is approved.
+  observed_behavior: pending-test
+
+human_escalation:
+  required: false
+  condition: Required if the requested source has a higher classification.

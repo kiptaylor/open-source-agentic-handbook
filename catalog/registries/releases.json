@@ -1,0 +1,23 @@
+{
+  "registry": "releases",
+  "schema_version": 1,
+  "current": "1.0.0",
+  "channels": {
+    "stable": "1.0.0"
+  },
+  "items": [
+    {
+      "version": "1.0.0",
+      "status": "stable",
+      "released": "2026-07-23",
+      "manifest_schema": 1,
+      "lock_schema": 1,
+      "minimum_node": "22",
+      "required_policies": [
+        "least-authority",
+        "human-approved-change"
+      ],
+      "notes": "First operational release with local generation, request export, and approval-gated drift updates."
+    }
+  ]
+}

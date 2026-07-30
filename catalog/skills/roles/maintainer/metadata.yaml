@@ -1,0 +1,6 @@
+skill:
+  id: maintainer
+  version: 0.1.0
+  bucket: role
+  status: foundation
+  source: original-first-principles

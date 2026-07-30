@@ -1,0 +1,36 @@
+profile:
+  id: builder
+  version: 0.1.0
+  class: worker
+  role: Implement an approved design and its validation behavior.
+skills:
+  core:
+    - scope-and-instruction-handling
+    - planning-and-termination
+    - safe-tool-use
+    - evidence-and-validation
+    - failure-recovery
+  role_pack: builder
+authority:
+  allowed_actions:
+    - edit-approved-files
+    - run-approved-local-checks
+    - produce-artifact
+  prohibited_actions:
+    - add-external-side-effect
+    - broaden-permission
+    - publish-without-approval
+context:
+  manifest_required: true
+  memory_write: none
+budgets:
+  retries: task-defined
+  tools: explicit-allowlist
+validation:
+  required:
+    - implementation-check
+    - failure-path-check
+    - public-safety-scan
+escalation:
+  - new-dependency-or-permission
+  - destructive-change

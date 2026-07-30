@@ -1,0 +1,4 @@
+# Copy this file to .public-safety-denylist and replace these synthetic entries.
+# Never commit the populated local file.
+sensitive-name-placeholder
+private-host-placeholder.invalid

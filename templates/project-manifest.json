@@ -1,0 +1,43 @@
+{
+  "$schema": "../schemas/project-manifest.schema.json",
+  "format": "open-agentic-handbook/project-manifest@1",
+  "project": {
+    "id": "synthetic-project",
+    "description": "A neutral project used to demonstrate a bounded agent integration."
+  },
+  "release": "1.0.0",
+  "selection": {
+    "agents": [
+      "orchestrator",
+      "security-governor",
+      "verifier",
+      "builder"
+    ],
+    "skills": {
+      "core": "agent-required",
+      "optional": [],
+      "project": []
+    },
+    "guides": [
+      "orchestration",
+      "distribution",
+      "updates"
+    ]
+  },
+  "boundaries": {
+    "data": [
+      "approved project files"
+    ],
+    "permissions": [
+      "read approved project files",
+      "write in-scope local artifacts",
+      "run approved validation"
+    ],
+    "external_side_effects": "Human approval is required.",
+    "context": "Use approved project files and provenance-preserving handoffs only."
+  },
+  "output": {
+    "directory": ".agentic",
+    "mode": "bundle"
+  }
+}

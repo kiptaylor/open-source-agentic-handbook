@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/handbook-lock.schema.json",
+  "title": "Generated handbook lock",
+  "type": "object",
+  "required": [
+    "format",
+    "release",
+    "project_id",
+    "manifest_digest",
+    "registry_digest",
+    "selection_digest",
+    "selection",
+    "generated_at"
+  ],
+  "properties": {
+    "format": { "const": "open-agentic-handbook/lock@1" },
+    "release": { "type": "string" },
+    "project_id": { "type": "string" },
+    "manifest_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "registry_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "selection_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "selection": {
+      "type": "object",
+      "required": ["agents", "skills", "policies", "guides"]
+    },
+    "generated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

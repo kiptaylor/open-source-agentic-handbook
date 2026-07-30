@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "assets": [
+    {
+      "path": "site/public/og.png",
+      "purpose": "Open Agentic Handbook social preview",
+      "sourceType": "generated-for-this-project",
+      "reviewed": true,
+      "review": "Confirmed to contain the public product name, v1 hub-to-manifest motif, exact public tagline, and no unrelated marks or source material."
+    }
+  ]
+}

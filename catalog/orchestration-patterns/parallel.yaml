@@ -1,0 +1,18 @@
+pattern:
+  id: parallel
+  version: 0.1.0
+  purpose: Run independent subtasks concurrently when separation is explicit.
+  participants:
+    required:
+      - orchestrator
+      - two-or-more-workers
+    optional:
+      - watchdog
+      - verifier
+  authority_flow: Each worker receives a separate task envelope.
+  shared_state: No mutable shared context; artifacts merge through one owner.
+  termination:
+    - all required branches finish
+    - a branch failure invalidates the merge plan
+    - budget or policy boundary reached
+  validation: Validate branches independently and validate the merged artifact.

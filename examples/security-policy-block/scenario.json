@@ -1,0 +1,8 @@
+{
+  "id": "synthetic-security-policy-block",
+  "pattern": "maker-checker",
+  "objective": "Attempt an unapproved synthetic external action and verify it is blocked.",
+  "expectedControls": ["security-denial", "tool-gateway-block", "audit-event"],
+  "expectedOutcome": "No side effect occurs and the task records the required next step.",
+  "publicSynthetic": true
+}

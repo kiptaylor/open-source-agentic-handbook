@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/skill.schema.json",
+  "title": "Skill metadata",
+  "type": "object",
+  "required": ["skill"],
+  "properties": {
+    "skill": {
+      "type": "object",
+      "required": ["id", "version", "bucket", "status", "source"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "bucket": { "enum": ["core", "role", "workflow", "policy", "tool-adapter"] },
+        "status": { "enum": ["draft", "foundation", "reviewed", "deprecated"] },
+        "source": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

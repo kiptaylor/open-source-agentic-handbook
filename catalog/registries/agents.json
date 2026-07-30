@@ -1,0 +1,323 @@
+{
+  "registry": "agents",
+  "schema_version": 1,
+  "release": "1.0.0",
+  "items": [
+    {
+      "id": "orchestrator",
+      "version": "0.1.0",
+      "class": "control-plane",
+      "path": "catalog/profiles/control-plane/orchestrator.yaml",
+      "summary": "Routes bounded work, issues task envelopes, tracks dependencies, and owns termination.",
+      "responsibilities": [
+        "Select the smallest sufficient orchestration pattern.",
+        "Delegate narrower authority through explicit task envelopes.",
+        "Collect handoffs, evidence, and completion decisions."
+      ],
+      "dependencies": {
+        "skills": [
+          "scope-and-instruction-handling",
+          "planning-and-termination",
+          "human-escalation"
+        ],
+        "agents": [
+          "security-governor"
+        ]
+      },
+      "permissions": {
+        "may": [
+          "create narrower task envelopes",
+          "assign approved profiles",
+          "pause or cancel work"
+        ],
+        "must_not": [
+          "grant unapproved permission",
+          "bypass a policy decision",
+          "silently change an objective"
+        ]
+      },
+      "context": "Task metadata, dependencies, budgets, and approved artifact summaries.",
+      "security": "Coordinates authority but cannot expand or enforce it alone.",
+      "available_additions": [
+        "watchdog",
+        "context-steward",
+        "verifier"
+      ]
+    },
+    {
+      "id": "watchdog",
+      "version": "0.1.0",
+      "class": "control-plane",
+      "path": "catalog/profiles/control-plane/watchdog.yaml",
+      "summary": "Observes execution for loops, stalls, drift, conflicts, and budget exhaustion.",
+      "responsibilities": [
+        "Monitor minimal approved telemetry.",
+        "Pause work when a configured threshold is crossed.",
+        "Record evidence and a safe resume condition."
+      ],
+      "dependencies": {
+        "skills": [
+          "planning-and-termination",
+          "failure-recovery",
+          "human-escalation"
+        ],
+        "agents": []
+      },
+      "permissions": {
+        "may": [
+          "observe approved events",
+          "pause work",
+          "recommend stop or escalation"
+        ],
+        "must_not": [
+          "rewrite the objective",
+          "edit a worker artifact",
+          "read unrelated source content"
+        ]
+      },
+      "context": "Minimal task telemetry and the boundaries required to recognize drift.",
+      "security": "Observation does not grant access to complete task data.",
+      "available_additions": [
+        "verifier"
+      ]
+    },
+    {
+      "id": "context-steward",
+      "version": "0.1.0",
+      "class": "control-plane",
+      "path": "catalog/profiles/control-plane/context-steward.yaml",
+      "summary": "Preserves approved context, provenance, decisions, and resumability across compaction and handoff.",
+      "responsibilities": [
+        "Assemble the smallest approved context package.",
+        "Record source provenance, freshness, and classification.",
+        "Preserve decisions, risks, omissions, and next actions for resume."
+      ],
+      "dependencies": {
+        "skills": [
+          "public-source-boundaries",
+          "state-and-memory-hygiene",
+          "evidence-and-validation"
+        ],
+        "agents": []
+      },
+      "permissions": {
+        "may": [
+          "summarize approved context",
+          "record omissions",
+          "issue a context manifest"
+        ],
+        "must_not": [
+          "introduce an unapproved source",
+          "hide compaction loss",
+          "write persistent memory without authority"
+        ]
+      },
+      "context": "Only sources listed in the active task envelope, with a required manifest.",
+      "security": "Unsafe compaction or missing provenance pauses dependent work.",
+      "available_additions": [
+        "state-and-memory-hygiene"
+      ]
+    },
+    {
+      "id": "security-governor",
+      "version": "0.1.0",
+      "class": "control-plane",
+      "path": "catalog/profiles/control-plane/security-governor.yaml",
+      "summary": "Checks permissions, data boundaries, policy rules, recipients, and planned side effects.",
+      "responsibilities": [
+        "Evaluate proposed actions before consequential execution.",
+        "Allow, deny, or escalate with a recorded reason.",
+        "Require deterministic enforcement at tool and data boundaries."
+      ],
+      "dependencies": {
+        "skills": [
+          "public-source-boundaries",
+          "safe-tool-use",
+          "human-escalation",
+          "public-source-publication"
+        ],
+        "agents": []
+      },
+      "permissions": {
+        "may": [
+          "allow or deny a proposed action",
+          "require a deterministic control",
+          "escalate an exception"
+        ],
+        "must_not": [
+          "execute the requested side effect",
+          "weaken enforcement",
+          "approve its own exception"
+        ]
+      },
+      "context": "Policy-relevant task, data, tool, and recipient metadata only.",
+      "security": "A model decision never replaces deterministic permission checks.",
+      "available_additions": [
+        "public-source-publication"
+      ]
+    },
+    {
+      "id": "verifier",
+      "version": "0.1.0",
+      "class": "control-plane",
+      "path": "catalog/profiles/control-plane/verifier.yaml",
+      "summary": "Independently checks artifacts against completion, evidence, test, and policy criteria.",
+      "responsibilities": [
+        "Inspect immutable artifacts and their evidence.",
+        "Run approved checks.",
+        "Accept, reject, or request an in-scope revision."
+      ],
+      "dependencies": {
+        "skills": [
+          "evidence-and-validation",
+          "public-source-boundaries",
+          "human-escalation",
+          "reviewer"
+        ],
+        "agents": []
+      },
+      "permissions": {
+        "may": [
+          "inspect artifacts",
+          "run approved checks",
+          "accept or reject"
+        ],
+        "must_not": [
+          "edit the maker artifact",
+          "broaden task scope",
+          "waive a security decision"
+        ]
+      },
+      "context": "The artifact, evidence record, completion criteria, and applicable decisions.",
+      "security": "The verifier should be independent from the artifact maker.",
+      "available_additions": [
+        "reviewer"
+      ]
+    },
+    {
+      "id": "researcher",
+      "version": "0.1.0",
+      "class": "worker",
+      "path": "catalog/profiles/workers/researcher.yaml",
+      "summary": "Finds, evaluates, and records approved public evidence for a bounded question.",
+      "responsibilities": [
+        "Search only approved source classes.",
+        "Separate evidence, inference, and unresolved questions.",
+        "Return provenance with findings."
+      ],
+      "dependencies": {
+        "skills": [
+          "scope-and-instruction-handling",
+          "public-source-boundaries",
+          "evidence-and-validation",
+          "researcher"
+        ],
+        "agents": [
+          "security-governor"
+        ]
+      },
+      "permissions": {
+        "may": [
+          "inspect approved public sources",
+          "record evidence",
+          "produce a bounded research artifact"
+        ],
+        "must_not": [
+          "use an unapproved source",
+          "publish",
+          "expand the research question"
+        ]
+      },
+      "context": "Approved question, source boundary, evidence requirements, and current context manifest.",
+      "security": "New sources or higher data classifications require scope review.",
+      "available_additions": [
+        "public-knowledge-transfer",
+        "maintainer"
+      ]
+    },
+    {
+      "id": "writer",
+      "version": "0.1.0",
+      "class": "worker",
+      "path": "catalog/profiles/workers/writer.yaml",
+      "summary": "Creates concise first-principles guidance from an approved brief and evidence set.",
+      "responsibilities": [
+        "Write to explicit audience and completion criteria.",
+        "Preserve citations and uncertainty.",
+        "Keep provider-specific notes separate from durable guidance."
+      ],
+      "dependencies": {
+        "skills": [
+          "scope-and-instruction-handling",
+          "public-source-boundaries",
+          "evidence-and-validation",
+          "writer"
+        ],
+        "agents": [
+          "verifier"
+        ]
+      },
+      "permissions": {
+        "may": [
+          "read approved artifacts",
+          "draft local content",
+          "revise in scope"
+        ],
+        "must_not": [
+          "invent evidence",
+          "publish without approval",
+          "weaken policy language"
+        ]
+      },
+      "context": "Approved brief, evidence record, style rules, and active task decisions.",
+      "security": "Source boundaries apply to both drafting inputs and examples.",
+      "available_additions": [
+        "reviewer",
+        "public-knowledge-transfer"
+      ]
+    },
+    {
+      "id": "builder",
+      "version": "0.1.0",
+      "class": "worker",
+      "path": "catalog/profiles/workers/builder.yaml",
+      "summary": "Implements an approved design and returns tested artifacts with bounded side effects.",
+      "responsibilities": [
+        "Implement only the approved scope.",
+        "Validate in proportion to risk.",
+        "Record changed artifacts, evidence, and remaining risks."
+      ],
+      "dependencies": {
+        "skills": [
+          "scope-and-instruction-handling",
+          "planning-and-termination",
+          "safe-tool-use",
+          "evidence-and-validation",
+          "builder"
+        ],
+        "agents": [
+          "security-governor",
+          "verifier"
+        ]
+      },
+      "permissions": {
+        "may": [
+          "read approved project files",
+          "write in-scope artifacts",
+          "run approved validation"
+        ],
+        "must_not": [
+          "perform an unapproved external side effect",
+          "change unrelated files",
+          "skip required validation"
+        ]
+      },
+      "context": "Approved design, task envelope, project files, and validation criteria.",
+      "security": "Destructive, external, or expanded actions require explicit authority.",
+      "available_additions": [
+        "failure-recovery",
+        "maintainer"
+      ]
+    }
+  ]
+}

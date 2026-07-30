@@ -1,0 +1,55 @@
+task:
+  id: synthetic-task-001
+  revision: 1
+  objective: Review a synthetic chapter outline for public-source readiness.
+  completion_criteria:
+    - Every required gate has a recorded result.
+    - Findings distinguish evidence from inference.
+
+scope:
+  included:
+    - synthetic chapter outline
+    - public-source checklist
+  excluded:
+    - private notes
+    - recordings and transcripts
+    - real names and organization details
+
+data:
+  classification: public-synthetic
+  approved_sources:
+    - artifact://synthetic/chapter-outline
+    - artifact://public/publication-checklist
+  retention: task-lifetime
+
+authority:
+  profile: synthetic-reviewer
+  allowed_tools:
+    - local-file-read
+  allowed_actions:
+    - inspect
+    - produce-review
+  external_side_effects: none
+
+budgets:
+  retries: 1
+  concurrency: 1
+  time_limit_minutes: 15
+
+validation:
+  verifier_profile: synthetic-verifier
+  required_evidence:
+    - gate results
+    - cited artifact locations
+
+human_approval:
+  required_for:
+    - higher-data-classification
+    - new-tool-or-source
+    - external-publication
+
+termination:
+  stop_when:
+    - completion criteria are met
+    - a prohibited input is discovered
+    - the retry budget is exhausted

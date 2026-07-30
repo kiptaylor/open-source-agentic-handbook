@@ -18,6 +18,8 @@ content must be safe to read, reuse, and discuss in public.
 - Employer, customer, or partner information that is not already public
 - Proprietary workflows, examples, identifiers, URLs, credentials, or datasets
 - Material whose ownership or license is unclear
+- Raw recordings, audio, video, or derived transcripts
+- Private repository labels, filenames, knowledge-base names, or author lists
 
 ## Review requirements
 
@@ -34,3 +36,15 @@ Before a change is pushed:
 
 When provenance is uncertain, leave the material out and recreate the concept
 from public sources and first principles.
+
+Candidate inventories must also remain public-safe. Record only a generic
+concept, intended reader outcome, decision, and public evidence. Do not use a
+candidate record to store private excerpts, source filenames, repository names,
+people, organizations, or private links.
+
+Media ingestion is deferred until the project defines and reviews a separate
+workflow for consent, retention, transcription isolation, personal-data
+detection, redaction, provenance, human approval, and deletion.
+
+Sensitive names used by local reviewers belong in the ignored local denylist,
+never in a committed scanner configuration.

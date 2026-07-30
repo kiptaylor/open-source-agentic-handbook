@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/context-manifest.schema.json",
+  "title": "Context manifest",
+  "type": "object",
+  "required": ["context_manifest", "sources", "required_state", "compaction", "prohibited_context"],
+  "properties": {
+    "context_manifest": {
+      "type": "object",
+      "required": ["task_id", "revision", "prepared_by", "context_budget_units"]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "classification", "provenance", "freshness", "transformation"]
+      }
+    },
+    "required_state": {
+      "type": "object",
+      "required": ["objective_preserved", "authority_preserved", "decisions_preserved", "open_risks_preserved"]
+    },
+    "compaction": {
+      "type": "object",
+      "required": ["performed", "retained", "summarized", "omitted", "integrity_check"]
+    },
+    "prohibited_context": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

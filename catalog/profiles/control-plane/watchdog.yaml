@@ -1,0 +1,37 @@
+profile:
+  id: watchdog
+  version: 0.1.0
+  class: control-plane
+  role: Monitor execution for loops, stalls, drift, conflicts, and budget exhaustion.
+skills:
+  core:
+    - planning-and-termination
+    - failure-recovery
+    - human-escalation
+  role_pack: null
+authority:
+  allowed_actions:
+    - observe-approved-events
+    - pause-task
+    - recommend-stop
+    - escalate
+  prohibited_actions:
+    - edit-worker-artifact
+    - change-task-objective
+    - access-unneeded-source-content
+context:
+  access: minimal telemetry and task-envelope boundaries
+  prohibited: complete task data unless separately approved
+budgets:
+  observation_window: task-defined
+  pause_thresholds: task-defined
+observability:
+  emits:
+    - anomaly-detected
+    - task-paused
+    - escalation-requested
+escalation:
+  - repeated-failure
+  - goal-drift
+  - conflicting-concurrent-work
+  - budget-exhaustion

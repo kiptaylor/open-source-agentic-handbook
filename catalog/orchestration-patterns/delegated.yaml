@@ -1,0 +1,18 @@
+pattern:
+  id: delegated
+  version: 0.1.0
+  purpose: Assign a narrower subtask to a specialist profile.
+  participants:
+    required:
+      - orchestrator
+      - worker
+    optional:
+      - verifier
+      - watchdog
+  authority_flow: The orchestrator creates a narrower child task envelope.
+  shared_state: Versioned artifacts and explicit handoffs only.
+  termination:
+    - child completion criteria met
+    - child task safely stopped
+    - parent task cancelled
+  validation: Verify the child artifact before merging it into parent work.

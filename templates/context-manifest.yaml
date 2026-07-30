@@ -1,0 +1,35 @@
+context_manifest:
+  task_id: synthetic-task-001
+  revision: 1
+  prepared_by: synthetic-context-steward
+  context_budget_units: 100
+
+sources:
+  - id: artifact://synthetic/chapter-outline
+    classification: public-synthetic
+    provenance: created-for-this-project
+    freshness: current-task
+    transformation: none
+  - id: artifact://public/publication-checklist
+    classification: public
+    provenance: repository-policy
+    freshness: reviewed-at-task-start
+    transformation: summarized
+
+required_state:
+  objective_preserved: true
+  authority_preserved: true
+  decisions_preserved: true
+  open_risks_preserved: true
+
+compaction:
+  performed: false
+  retained: []
+  summarized: []
+  omitted: []
+  integrity_check: pending
+
+prohibited_context:
+  - unapproved sources
+  - private identifiers
+  - raw recordings or transcripts

@@ -1,0 +1,41 @@
+{
+  "registry": "policies",
+  "schema_version": 1,
+  "release": "1.0.0",
+  "items": [
+    {
+      "id": "least-authority",
+      "version": "1.0.0",
+      "status": "required",
+      "path": "docs/foundations/FOUNDATION.md",
+      "applies_to": [
+        "all generated integrations"
+      ],
+      "summary": "Profiles receive only the data, tools, actions, and side effects required by the active task."
+    },
+    {
+      "id": "public-source-publication",
+      "version": "0.1.0",
+      "status": "required-for-publication",
+      "path": "docs/policies/PUBLIC_SOURCE_POLICY.md",
+      "applies_to": [
+        "public artifacts",
+        "hub contributions"
+      ],
+      "summary": "Public material uses original, public, licensed, or synthetic inputs with reviewable provenance."
+    },
+    {
+      "id": "human-approved-change",
+      "version": "1.0.0",
+      "status": "required",
+      "path": "docs/distribution/LIFECYCLE.md",
+      "applies_to": [
+        "permissions",
+        "data boundaries",
+        "catalog upgrades",
+        "external side effects"
+      ],
+      "summary": "Material change follows check, plan, human decision, apply, validate, and record."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "synthetic-parallel-review",
+  "pattern": "parallel",
+  "objective": "Review a synthetic artifact separately for provenance and permission boundaries.",
+  "expectedControls": ["separate-task-envelopes", "no-mutable-shared-context", "merge-validation"],
+  "expectedOutcome": "The merge owner combines compatible findings and records conflicts.",
+  "publicSynthetic": true
+}

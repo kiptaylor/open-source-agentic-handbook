@@ -1,0 +1,6 @@
+skill:
+  id: public-source-publication
+  version: 0.1.0
+  bucket: policy
+  status: foundation
+  source: repository-policy

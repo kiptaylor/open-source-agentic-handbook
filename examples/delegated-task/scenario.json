@@ -1,0 +1,8 @@
+{
+  "id": "synthetic-delegated-task",
+  "pattern": "delegated",
+  "objective": "Verify one synthetic technical claim using an approved public placeholder source.",
+  "expectedControls": ["narrower-child-envelope", "explicit-handoff", "merge-owner"],
+  "expectedOutcome": "Only the verified evidence record returns to the parent task.",
+  "publicSynthetic": true
+}

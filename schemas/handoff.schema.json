@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/handoff.schema.json",
+  "title": "Agent handoff",
+  "type": "object",
+  "required": ["handoff", "completed", "artifacts", "evidence", "remaining", "context_manifest", "escalation"],
+  "properties": {
+    "handoff": {
+      "type": "object",
+      "required": ["task_id", "from_profile", "to_profile", "task_revision"]
+    },
+    "completed": { "type": "array", "items": { "type": "string" } },
+    "artifacts": { "type": "array", "items": { "type": "object" } },
+    "evidence": {
+      "type": "object",
+      "required": ["facts", "inferences", "proposals"]
+    },
+    "remaining": {
+      "type": "object",
+      "required": ["unresolved_risks", "remaining_budget", "next_allowed_action"]
+    },
+    "context_manifest": { "type": "object", "required": ["id", "revision"] },
+    "escalation": { "type": "object" }
+  },
+  "additionalProperties": true
+}

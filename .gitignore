@@ -11,3 +11,7 @@ __pycache__/
 node_modules/
 dist/
 build/
+!site/build/
+!site/build/**
+.public-safety-denylist
+.handbook/

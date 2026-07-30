@@ -1,0 +1,18 @@
+pattern:
+  id: maker-checker
+  version: 0.1.0
+  purpose: Separate artifact creation from independent acceptance.
+  participants:
+    required:
+      - maker
+      - verifier
+    optional:
+      - orchestrator
+      - security-governor
+  authority_flow: The verifier can accept, reject, or request in-scope revision.
+  shared_state: The maker hands off an immutable artifact and evidence record.
+  termination:
+    - verifier accepts
+    - revision budget exhausted
+    - policy or scope escalation required
+  validation: The verifier applies completion criteria without editing the result.

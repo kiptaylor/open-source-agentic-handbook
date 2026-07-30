@@ -1,0 +1,45 @@
+{
+  "$schema": "../schemas/project-manifest.schema.json",
+  "format": "open-agentic-handbook/project-manifest@1",
+  "project": {
+    "id": "synthetic-starter",
+    "description": "A neutral repository adopting a bounded build workflow."
+  },
+  "release": "1.0.0",
+  "selection": {
+    "agents": [
+      "orchestrator",
+      "watchdog",
+      "context-steward",
+      "security-governor",
+      "verifier",
+      "builder"
+    ],
+    "skills": {
+      "core": "agent-required",
+      "optional": [],
+      "project": []
+    },
+    "guides": [
+      "orchestration",
+      "distribution",
+      "updates"
+    ]
+  },
+  "boundaries": {
+    "data": [
+      "approved project files"
+    ],
+    "permissions": [
+      "read approved project files",
+      "write in-scope local artifacts",
+      "run approved validation"
+    ],
+    "external_side_effects": "Human approval is required.",
+    "context": "Use approved project files, explicit task decisions, and provenance-preserving handoffs."
+  },
+  "output": {
+    "directory": ".agentic",
+    "mode": "bundle"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "synthetic-scope-expansion",
+  "pattern": "delegated",
+  "objective": "Request one additional public source without assuming access.",
+  "expectedControls": ["worker-pause", "security-review", "new-envelope-revision"],
+  "expectedOutcome": "The request is approved or rejected before source access occurs.",
+  "publicSynthetic": true
+}

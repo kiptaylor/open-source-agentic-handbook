@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/open-agentic-handbook/update-record.schema.json",
+  "title": "Applied handbook update record",
+  "type": "object",
+  "required": [
+    "format",
+    "project_id",
+    "applied_at",
+    "plan",
+    "approval",
+    "result"
+  ],
+  "properties": {
+    "format": { "const": "open-agentic-handbook/update-record@1" },
+    "project_id": { "type": "string" },
+    "applied_at": { "type": "string", "format": "date-time" },
+    "plan": {
+      "type": "object",
+      "required": ["id", "digest", "changes"]
+    },
+    "approval": {
+      "type": "object",
+      "required": ["id", "reviewer", "decided_at", "conditions"]
+    },
+    "result": {
+      "type": "object",
+      "required": ["release", "selection_digest", "validation"]
+    }
+  },
+  "additionalProperties": false
+}
