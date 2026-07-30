@@ -21,11 +21,7 @@ scenarios, and repository-wide validation.
 
 ## Content boundaries
 
-This repository is built from first principles and public sources. It does not
-import private repository history, private notes, transcripts, internal process
-documents, proprietary examples, or confidential data. See
-[Public Source Policy](docs/policies/PUBLIC_SOURCE_POLICY.md) for the
-contribution rules.
+This repository is built from first principles and public sources.
 
 ## Handbook areas
 
